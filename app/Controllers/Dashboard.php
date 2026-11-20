@@ -2210,7 +2210,7 @@ class Dashboard extends BaseController
 
     public function calculateDashboardLpseData($yearFilter = 'all', $quarterFilter = 'all')
     {
-        $cacheKey = "dashboard_lpse_v9_{$yearFilter}_{$quarterFilter}";
+        $cacheKey = "dashboard_lpse_v10_{$yearFilter}_{$quarterFilter}";
 
         if (!$result = cache($cacheKey)) {
             $allYears = [];
@@ -2234,6 +2234,7 @@ class Dashboard extends BaseController
             // Peta tanggal pelaksanaan RUP swakelola & Peta Pagu RUP Penyedia untuk E-Purchasing
             $rupSwakelolaDates = [];
             $rupEpPaguMap = [];
+            $rupEpJenisMap = [];
             try {
                 $db = \Config\Database::connect();
                 $rupRows = $db->table('rup_swakelola')
@@ -2247,13 +2248,16 @@ class Dashboard extends BaseController
                 }
 
                 $rupPenyediaRows = $db->table('rup_penyedia')
-                    ->select('kd_rup, pagu')
+                    ->select('kd_rup, pagu, jenis_pengadaan')
                     ->where("LOWER(metode_pengadaan) LIKE '%e-purchasing%' OR LOWER(metode_pengadaan) LIKE '%epurchasing%'")
                     ->get()->getResultArray();
                 foreach ($rupPenyediaRows as $r) {
                     $rkStr = trim((string) ($r['kd_rup'] ?? ''));
                     if ($rkStr !== '') {
                         $rupEpPaguMap[$rkStr] = (float) ($r['pagu'] ?? 0);
+                        if (!empty($r['jenis_pengadaan'])) {
+                            $rupEpJenisMap[$rkStr] = trim((string) $r['jenis_pengadaan']);
+                        }
                     }
                 }
             } catch (\Throwable $e) {
@@ -2379,17 +2383,38 @@ class Dashboard extends BaseController
                         continue;
                     }
 
-                    // Tentukan RUP Key & Pagu Baris
+                    // Tentukan RUP Key & Pagu Baris & Metadata (Metode & Jenis Pengadaan)
                     if ($label === 'E-Purchasing') {
                         $rk = trim((string) ($row['rup_code'] ?? ''));
                         $rowPagu = isset($rupEpPaguMap[$rk]) ? $rupEpPaguMap[$rk] : (float) ($row['pagu'] ?? $realisasi);
-                        $jenis = 'Pengadaan Barang / Jasa';
-                    } else {
+                        $jenis = isset($rupEpJenisMap[$rk]) && $rupEpJenisMap[$rk] !== '' ? $rupEpJenisMap[$rk] : 'Pengadaan Barang';
+                        $metode = 'E-Purchasing (Katalog)';
+                    } elseif ($label === 'Tender') {
                         $rk = trim((string) ($row['kd_rup'] ?? ''));
                         $rowPagu = (float) ($row['pagu'] ?? 0);
-                        $jenis = $row['jenis_pengadaan'] ?? ($row['kgr_nama'] ?? 'Lainnya');
-                        if (trim($jenis) === '')
-                            $jenis = 'Lainnya';
+                        $jenis = trim((string) ($row['jenis_pengadaan'] ?? ($row['kgr_nama'] ?? 'Lainnya')));
+                        if ($jenis === '') $jenis = 'Lainnya';
+                        $metode = trim((string) ($row['metode'] ?? 'Tender'));
+                        if ($metode === '') $metode = 'Tender';
+                    } elseif ($label === 'Non Tender') {
+                        $rk = trim((string) ($row['kd_rup'] ?? ''));
+                        $rowPagu = (float) ($row['pagu'] ?? 0);
+                        $jenis = trim((string) ($row['jenis_pengadaan'] ?? ($row['kgr_nama'] ?? 'Lainnya')));
+                        if ($jenis === '') $jenis = 'Lainnya';
+                        $metode = trim((string) ($row['metode'] ?? 'Pengadaan Langsung'));
+                        if ($metode === '') $metode = 'Pengadaan Langsung';
+                    } elseif ($label === 'Pencatatan Non Tender') {
+                        $rk = trim((string) ($row['kd_rup'] ?? ''));
+                        $rowPagu = (float) ($row['pagu'] ?? 0);
+                        $jenis = trim((string) ($row['kategori_pengadaan'] ?? ($row['jenis_pengadaan'] ?? 'Lainnya')));
+                        if ($jenis === '') $jenis = 'Lainnya';
+                        $metode = trim((string) ($row['mtd_pemilihan'] ?? 'Pengadaan Langsung'));
+                        if ($metode === '') $metode = 'Pengadaan Langsung';
+                    } elseif ($label === 'Pencatatan Swakelola') {
+                        $rk = trim((string) ($row['kd_rup'] ?? ''));
+                        $rowPagu = (float) ($row['pagu'] ?? 0);
+                        $jenis = 'Swakelola';
+                        $metode = !empty($row['jenis_realisasi']) ? trim((string) $row['jenis_realisasi']) : 'Swakelola';
                     }
 
                     // Ekstraksi Triwulan
@@ -2437,7 +2462,8 @@ class Dashboard extends BaseController
                             'pagu' => $rowPagu,
                             'realisasi' => 0.0,
                             'count' => 0,
-                            'jenis' => $jenis
+                            'jenis' => $jenis,
+                            'metode' => $metode,
                         ];
                     } else {
                         // Jika ada pagu yang lebih tinggi dilaporkan untuk RUP ini, ambil yang terbesar
@@ -2451,10 +2477,16 @@ class Dashboard extends BaseController
                 }
             }
 
-            // Agregasi hasil akhir per label dan per tahun (Pagu RUP dihitung tepat 1x tanpa anomali pengulangan)
+            // Agregasi hasil akhir per label, kanal, dan per tahun (Pagu RUP dihitung tepat 1x tanpa anomali pengulangan)
+            $byKanal = [];
             foreach (array_keys($sources) as $label) {
                 $totalPagu[$label] = 0;
                 $totalRealisasi[$label] = 0;
+                $byKanal[$label] = [
+                    'total' => ['pagu' => 0, 'realisasi' => 0, 'efisiensi' => 0, 'count' => 0, 'pct' => 0, 'ef_pct' => 0],
+                    'metode' => [],
+                    'jenis' => []
+                ];
 
                 if (!isset($rupItemGroups[$label])) {
                     continue;
@@ -2475,6 +2507,7 @@ class Dashboard extends BaseController
                         $real = $gData['realisasi'];
                         $cnt = $gData['count'];
                         $jns = $gData['jenis'];
+                        $mtd = $gData['metode'];
 
                         if (!isset($byJenis[$jns][$yr])) {
                             $byJenis[$jns][$yr] = ['pagu' => 0, 'realisasi' => 0, 'count' => 0];
@@ -2498,8 +2531,57 @@ class Dashboard extends BaseController
                         $totalJenis[$jns]['realisasi'] += $real;
 
                         $byJenis[$jns][$yr]['count'] += $cnt;
+
+                        // Akumulasi byKanal
+                        $byKanal[$label]['total']['pagu'] += $effectivePagu;
+                        $byKanal[$label]['total']['realisasi'] += $real;
+                        $byKanal[$label]['total']['count'] += $cnt;
+
+                        if (!isset($byKanal[$label]['metode'][$mtd])) {
+                            $byKanal[$label]['metode'][$mtd] = ['pagu' => 0, 'realisasi' => 0, 'count' => 0];
+                        }
+                        $byKanal[$label]['metode'][$mtd]['pagu'] += $effectivePagu;
+                        $byKanal[$label]['metode'][$mtd]['realisasi'] += $real;
+                        $byKanal[$label]['metode'][$mtd]['count'] += $cnt;
+
+                        if (!isset($byKanal[$label]['jenis'][$jns])) {
+                            $byKanal[$label]['jenis'][$jns] = ['pagu' => 0, 'realisasi' => 0, 'count' => 0];
+                        }
+                        $byKanal[$label]['jenis'][$jns]['pagu'] += $effectivePagu;
+                        $byKanal[$label]['jenis'][$jns]['realisasi'] += $real;
+                        $byKanal[$label]['jenis'][$jns]['count'] += $cnt;
                     }
                 }
+
+                // Hitung efisiensi dan rasio untuk byKanal
+                $totP = $byKanal[$label]['total']['pagu'];
+                $totR = $byKanal[$label]['total']['realisasi'];
+                $totEf = max(0, $totP - $totR);
+                $byKanal[$label]['total']['efisiensi'] = $totEf;
+                $byKanal[$label]['total']['pct'] = $totP > 0 ? round(($totR / $totP) * 100, 1) : 0;
+                $byKanal[$label]['total']['ef_pct'] = $totP > 0 ? round(($totEf / $totP) * 100, 1) : 0;
+
+                foreach ($byKanal[$label]['metode'] as $mKey => &$mVal) {
+                    $mEf = max(0, $mVal['pagu'] - $mVal['realisasi']);
+                    $mVal['efisiensi'] = $mEf;
+                    $mVal['pct'] = $mVal['pagu'] > 0 ? round(($mVal['realisasi'] / $mVal['pagu']) * 100, 1) : 0;
+                    $mVal['ef_pct'] = $mVal['pagu'] > 0 ? round(($mEf / $mVal['pagu']) * 100, 1) : 0;
+                }
+                unset($mVal);
+                uasort($byKanal[$label]['metode'], function($a, $b) {
+                    return $b['realisasi'] <=> $a['realisasi'];
+                });
+
+                foreach ($byKanal[$label]['jenis'] as $jKey => &$jVal) {
+                    $jEf = max(0, $jVal['pagu'] - $jVal['realisasi']);
+                    $jVal['efisiensi'] = $jEf;
+                    $jVal['pct'] = $jVal['pagu'] > 0 ? round(($jVal['realisasi'] / $jVal['pagu']) * 100, 1) : 0;
+                    $jVal['ef_pct'] = $jVal['pagu'] > 0 ? round(($jEf / $jVal['pagu']) * 100, 1) : 0;
+                }
+                unset($jVal);
+                uasort($byKanal[$label]['jenis'], function($a, $b) {
+                    return $b['realisasi'] <=> $a['realisasi'];
+                });
             }
 
             // Urutkan jenis pengadaan berdasarkan total pagu menurun
@@ -2521,6 +2603,7 @@ class Dashboard extends BaseController
                 'total_jenis' => $totalJenis,
                 'by_quarter' => $byQuarter,
                 'quarter_filter' => $quarterFilter,
+                'by_kanal' => $byKanal,
             ];
 
             cache()->save($cacheKey, $result, 1800);
@@ -2919,6 +3002,11 @@ class Dashboard extends BaseController
             } elseif ($type === 'pencatatan-swakelola') {
                 $builder->where('jenis_realisasi', $jenisFilter);
             }
+        }
+
+        // Khusus pencatatan-nontender: jangan tampilkan jika realisasi nol (0)
+        if ($type === 'pencatatan-nontender') {
+            $builder->where('realisasi >', 0);
         }
 
         // Khusus pencatatan-swakelola: tampilkan hanya jika terealisasi (> 0) dan abaikan paket dibatalkan

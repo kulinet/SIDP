@@ -79,6 +79,11 @@
       .border-end-md { border-right: 1px solid #e2e8f0 !important; }
     }
     .fw-extrabold { font-weight: 800; }
+    .text-teal { color: #0d9488 !important; }
+    .text-purple { color: #7c3aed !important; }
+    .btn-xs { padding: 0.2rem 0.5rem; font-size: 0.75rem; border-radius: 4px; }
+    #kanalTabs .nav-link { border-radius: 8px; color: #475569; transition: all 0.2s; }
+    #kanalTabs .nav-link.active { background-color: #f1f5f9; color: #0f172a !important; font-weight: 700; border-bottom: 2px solid #2563eb; }
 
     /* Print Styles */
     @media print {
@@ -230,6 +235,112 @@
           <div class="d-flex justify-content-between small">
             <span class="text-muted" id="card-pct-swakelola-count">0 paket</span>
             <span class="fw-bold" style="color: #f59e0b;" id="card-pct-swakelola-pct">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Tiap Kanal: Metode & Jenis Pengadaan -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+        <div class="card-header bg-white border-bottom pb-3 pt-3">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h5 class="fw-bold mb-1 text-primary">
+                <i class="bx bx-layer me-2"></i>Rincian Pengadaan per Kanal (Metode & Jenis Pengadaan)
+              </h5>
+              <p class="text-muted small mb-0">Rincian komparasi pagu, realisasi riil, efisiensi anggaran, dan penyerapan untuk setiap metode pemilihan dan jenis pengadaan</p>
+            </div>
+            <div>
+              <span class="badge bg-label-info px-3 py-2 fw-semibold" id="kanal-filter-badge">Semua Tahun</span>
+            </div>
+          </div>
+          
+          <!-- Nav Tabs Kanal -->
+          <ul class="nav nav-pills mt-3 flex-wrap gap-1" id="kanalTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active py-2 px-3 fw-semibold" id="tab-btn-all" data-bs-toggle="pill" data-bs-target="#tab-pane-all" type="button" role="tab">
+                <i class="bx bx-grid-alt me-1"></i> Semua Kanal
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link py-2 px-3 fw-semibold" id="tab-btn-tender" data-bs-toggle="pill" data-bs-target="#tab-pane-tender" type="button" role="tab" style="color: #2563eb;">
+                <i class="bx bx-clipboard me-1"></i> Tender
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link py-2 px-3 fw-semibold text-teal" id="tab-btn-nontender" data-bs-toggle="pill" data-bs-target="#tab-pane-nontender" type="button" role="tab">
+                <i class="bx bx-file me-1"></i> Non Tender
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link py-2 px-3 fw-semibold text-success" id="tab-btn-epurchasing" data-bs-toggle="pill" data-bs-target="#tab-pane-epurchasing" type="button" role="tab">
+                <i class="bx bx-cart me-1"></i> E-Purchasing
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link py-2 px-3 fw-semibold text-purple" id="tab-btn-pct-nontender" data-bs-toggle="pill" data-bs-target="#tab-pane-pct-nontender" type="button" role="tab">
+                <i class="bx bx-receipt me-1"></i> Pencatatan Non Tender
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link py-2 px-3 fw-semibold text-warning" id="tab-btn-pct-swakelola" data-bs-toggle="pill" data-bs-target="#tab-pane-pct-swakelola" type="button" role="tab">
+                <i class="bx bx-building-house me-1"></i> Pencatatan Swakelola
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-body pt-3 pb-3">
+          <div class="tab-content p-0" id="kanalTabContent">
+            <!-- Tab Pane: Semua Kanal (Overview Komparasi) -->
+            <div class="tab-pane fade show active" id="tab-pane-all" role="tabpanel">
+              <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="table-overview-kanal">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="fw-bold">Kanal Pengadaan</th>
+                      <th class="fw-bold text-center">Jumlah Paket</th>
+                      <th class="fw-bold text-end">Total Pagu (Rp)</th>
+                      <th class="fw-bold text-end">Realisasi (Rp)</th>
+                      <th class="fw-bold text-end">Efisiensi (Rp)</th>
+                      <th class="fw-bold text-center" style="width: 180px;">Tingkat Penyerapan</th>
+                      <th class="fw-bold text-center" style="width: 130px;">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-overview-kanal">
+                    <!-- Populated via JS -->
+                  </tbody>
+                  <tfoot class="table-light fw-bold" id="tfoot-overview-kanal">
+                    <!-- Populated via JS -->
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab Panes for Specific Kanals -->
+            <!-- Tender -->
+            <div class="tab-pane fade" id="tab-pane-tender" role="tabpanel">
+              <div id="kanal-content-tender"></div>
+            </div>
+            <!-- Non Tender -->
+            <div class="tab-pane fade" id="tab-pane-nontender" role="tabpanel">
+              <div id="kanal-content-nontender"></div>
+            </div>
+            <!-- E-Purchasing -->
+            <div class="tab-pane fade" id="tab-pane-epurchasing" role="tabpanel">
+              <div id="kanal-content-epurchasing"></div>
+            </div>
+            <!-- Pencatatan Non Tender -->
+            <div class="tab-pane fade" id="tab-pane-pct-nontender" role="tabpanel">
+              <div id="kanal-content-pct-nontender"></div>
+            </div>
+            <!-- Pencatatan Swakelola -->
+            <div class="tab-pane fade" id="tab-pane-pct-swakelola" role="tabpanel">
+              <div id="kanal-content-pct-swakelola"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -454,6 +565,9 @@ function buildCharts(data) {
     document.getElementById(countId).textContent = totalCount.toLocaleString('id-ID') + ' paket';
   });
 
+  // --- Render Detail Tiap Kanal (Metode & Jenis Pengadaan) ---
+  renderKanalDetails(data.by_kanal);
+
   // --- Bar Chart: Realisasi per Jenis Pengadaan ---
   chartBar = new Chart(document.getElementById('chart-bar'), {
     type: 'bar',
@@ -676,6 +790,282 @@ function buildCharts(data) {
   const curQ = document.getElementById('quarter-filter').value;
   const qDesc = curQ === 'all' ? 'Semua Triwulan' : `Triwulan ${curQ}`;
   document.getElementById('quarter-chart-badge').textContent = `Tahun: ${curYear === 'all' ? 'Semua Tahun' : curYear} | Filter: ${qDesc}`;
+}
+
+function renderKanalDetails(byKanal) {
+  if (!byKanal) return;
+
+  const kanalMeta = {
+    'Tender': {
+      icon: 'bx bx-clipboard',
+      color: '#2563eb',
+      bgClass: 'bg-label-primary',
+      url: '<?= base_url('dashboard/lpse/tender') ?>',
+      containerId: 'kanal-content-tender'
+    },
+    'Non Tender': {
+      icon: 'bx bx-file',
+      color: '#0d9488',
+      bgClass: 'bg-label-info',
+      url: '<?= base_url('dashboard/lpse/nontender') ?>',
+      containerId: 'kanal-content-nontender'
+    },
+    'E-Purchasing': {
+      icon: 'bx bx-cart',
+      color: '#10b981',
+      bgClass: 'bg-label-success',
+      url: '<?= base_url('dashboard/table-epurchasing') ?>',
+      containerId: 'kanal-content-epurchasing'
+    },
+    'Pencatatan Non Tender': {
+      icon: 'bx bx-receipt',
+      color: '#7c3aed',
+      bgClass: 'bg-label-secondary',
+      url: '<?= base_url('dashboard/lpse/pencatatan-nontender') ?>',
+      containerId: 'kanal-content-pct-nontender'
+    },
+    'Pencatatan Swakelola': {
+      icon: 'bx bx-building-house',
+      color: '#f59e0b',
+      bgClass: 'bg-label-warning',
+      url: '<?= base_url('dashboard/lpse/pencatatan-swakelola') ?>',
+      containerId: 'kanal-content-pct-swakelola'
+    }
+  };
+
+  // 1. Render Tab Overview (Semua Kanal)
+  let tbodyHtml = '';
+  let totPkg = 0, totPagu = 0, totReal = 0, totEf = 0;
+
+  Object.keys(kanalMeta).forEach(lbl => {
+    const kData = byKanal[lbl] || { total: { pagu: 0, realisasi: 0, efisiensi: 0, count: 0, pct: 0, ef_pct: 0 }, metode: {}, jenis: {} };
+    const tot = kData.total || { pagu: 0, realisasi: 0, efisiensi: 0, count: 0, pct: 0, ef_pct: 0 };
+    totPkg += tot.count || 0;
+    totPagu += tot.pagu || 0;
+    totReal += tot.realisasi || 0;
+    totEf += tot.efisiensi || 0;
+
+    const meta = kanalMeta[lbl];
+    const pct = tot.pct || 0;
+    const efPct = tot.ef_pct || 0;
+    const metodeCount = Object.keys(kData.metode || {}).length;
+    const jenisCount = Object.keys(kData.jenis || {}).length;
+
+    tbodyHtml += `
+      <tr>
+        <td>
+          <div class="d-flex align-items-center">
+            <div class="avatar avatar-sm rounded me-2 ${meta.bgClass}">
+              <i class="${meta.icon} fs-5"></i>
+            </div>
+            <div>
+              <span class="fw-bold">${lbl}</span>
+              <small class="text-muted d-block">${metodeCount} metode pemilihan, ${jenisCount} jenis pengadaan</small>
+            </div>
+          </div>
+        </td>
+        <td class="text-center fw-semibold">${(tot.count || 0).toLocaleString('id-ID')}</td>
+        <td class="text-end fw-semibold">${fmt(tot.pagu)}</td>
+        <td class="text-end fw-bold" style="color: ${meta.color};">${fmt(tot.realisasi)}</td>
+        <td class="text-end fw-semibold text-success">${fmt(tot.efisiensi)} <small class="text-muted">(${efPct}%)</small></td>
+        <td>
+          <div class="d-flex align-items-center justify-content-between small mb-1">
+            <span class="fw-semibold">${pct}%</span>
+          </div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar" role="progressbar" style="width: ${Math.min(pct, 100)}%; background-color: ${meta.color};"></div>
+          </div>
+        </td>
+        <td class="text-center">
+          <a href="${meta.url}" target="_blank" class="btn btn-xs btn-outline-primary" title="Buka Data Tabel">
+            <i class="bx bx-table me-1"></i> Buka Tabel
+          </a>
+        </td>
+      </tr>
+    `;
+  });
+
+  const totPct = totPagu > 0 ? ((totReal / totPagu) * 100).toFixed(1) : 0;
+  const totEfPct = totPagu > 0 ? ((totEf / totPagu) * 100).toFixed(1) : 0;
+
+  const tbodyEl = document.getElementById('tbody-overview-kanal');
+  if (tbodyEl) tbodyEl.innerHTML = tbodyHtml;
+
+  const tfootEl = document.getElementById('tfoot-overview-kanal');
+  if (tfootEl) {
+    tfootEl.innerHTML = `
+      <tr>
+        <td>TOTAL KESELURUHAN</td>
+        <td class="text-center">${totPkg.toLocaleString('id-ID')}</td>
+        <td class="text-end">${fmt(totPagu)}</td>
+        <td class="text-end text-primary">${fmt(totReal)}</td>
+        <td class="text-end text-success">${fmt(totEf)} <small class="text-muted">(${totEfPct}%)</small></td>
+        <td>
+          <div class="d-flex align-items-center justify-content-between small mb-1">
+            <span class="fw-semibold">${totPct}%</span>
+          </div>
+          <div class="progress" style="height: 6px;">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: ${Math.min(totPct, 100)}%;"></div>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+    `;
+  }
+
+  // 2. Render Each Individual Kanal Tab Pane
+  Object.keys(kanalMeta).forEach(lbl => {
+    const meta = kanalMeta[lbl];
+    const kData = byKanal[lbl] || { total: {}, metode: {}, jenis: {} };
+    const tot = kData.total || { pagu: 0, realisasi: 0, efisiensi: 0, count: 0, pct: 0, ef_pct: 0 };
+    const metodes = kData.metode || {};
+    const jenisMap = kData.jenis || {};
+
+    let html = `
+      <!-- Kanal Header Banner -->
+      <div class="d-flex justify-content-between align-items-center p-3 mb-3 rounded flex-wrap gap-2" style="background-color: rgba(30, 41, 59, 0.03); border-left: 4px solid ${meta.color};">
+        <div>
+          <h6 class="fw-bold mb-1" style="color: ${meta.color};">
+            <i class="${meta.icon} me-1"></i> Rincian Kanal ${lbl}
+          </h6>
+          <div class="d-flex flex-wrap gap-3 mt-1 small">
+            <span>Pagu: <strong>${fmt(tot.pagu)}</strong></span>
+            <span>Realisasi: <strong style="color: ${meta.color};">${fmt(tot.realisasi)}</strong></span>
+            <span class="text-success">Efisiensi: <strong>${fmt(tot.efisiensi)} (${tot.ef_pct || 0}%)</strong></span>
+            <span>Penyerapan: <strong>${tot.pct || 0}%</strong> (${(tot.count || 0).toLocaleString('id-ID')} paket)</span>
+          </div>
+        </div>
+        <div>
+          <a href="${meta.url}" target="_blank" class="btn btn-sm btn-outline-primary">
+            <i class="bx bx-table me-1"></i> Buka Data Tabel ${lbl}
+          </a>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <!-- Kolom Metode Pemilihan -->
+        <div class="col-12 col-xl-6">
+          <div class="card border shadow-none h-100">
+            <div class="card-header py-2 bg-light border-bottom d-flex justify-content-between align-items-center">
+              <span class="fw-bold small text-uppercase"><i class="bx bx-check-shield me-1"></i> Metode Pemilihan</span>
+              <span class="badge bg-white text-dark border">${Object.keys(metodes).length} Metode</span>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle mb-0" style="font-size: 0.825rem;">
+                <thead class="table-light">
+                  <tr>
+                    <th>Metode Pemilihan</th>
+                    <th class="text-center">Paket</th>
+                    <th class="text-end">Pagu (Rp)</th>
+                    <th class="text-end">Realisasi (Rp)</th>
+                    <th class="text-center" style="width: 100px;">Penyerapan</th>
+                  </tr>
+                </thead>
+                <tbody>
+    `;
+
+    const mKeys = Object.keys(metodes);
+    if (mKeys.length === 0) {
+      html += `<tr><td colspan="5" class="text-center text-muted py-3">Tidak ada data metode</td></tr>`;
+    } else {
+      mKeys.forEach(mk => {
+        const mv = metodes[mk];
+        html += `
+          <tr>
+            <td class="fw-semibold">${mk}</td>
+            <td class="text-center">${mv.count}</td>
+            <td class="text-end">${fmt(mv.pagu)}</td>
+            <td class="text-end fw-bold" style="color: ${meta.color};">${fmt(mv.realisasi)}</td>
+            <td>
+              <div class="d-flex justify-content-between small" style="font-size: 0.75rem;">
+                <span>${mv.pct}%</span>
+              </div>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar" style="width: ${Math.min(mv.pct, 100)}%; background-color: ${meta.color};"></div>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom Jenis Pengadaan -->
+        <div class="col-12 col-xl-6">
+          <div class="card border shadow-none h-100">
+            <div class="card-header py-2 bg-light border-bottom d-flex justify-content-between align-items-center">
+              <span class="fw-bold small text-uppercase"><i class="bx bx-category me-1"></i> Jenis Pengadaan</span>
+              <span class="badge bg-white text-dark border">${Object.keys(jenisMap).length} Jenis</span>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle mb-0" style="font-size: 0.825rem;">
+                <thead class="table-light">
+                  <tr>
+                    <th>Jenis Pengadaan</th>
+                    <th class="text-center">Paket</th>
+                    <th class="text-end">Pagu (Rp)</th>
+                    <th class="text-end">Realisasi (Rp)</th>
+                    <th class="text-center" style="width: 100px;">Penyerapan</th>
+                  </tr>
+                </thead>
+                <tbody>
+    `;
+
+    const jKeys = Object.keys(jenisMap);
+    if (jKeys.length === 0) {
+      html += `<tr><td colspan="5" class="text-center text-muted py-3">Tidak ada data jenis pengadaan</td></tr>`;
+    } else {
+      jKeys.forEach(jk => {
+        const jv = jenisMap[jk];
+        html += `
+          <tr>
+            <td class="fw-semibold">${jk}</td>
+            <td class="text-center">${jv.count}</td>
+            <td class="text-end">${fmt(jv.pagu)}</td>
+            <td class="text-end fw-bold" style="color: ${meta.color};">${fmt(jv.realisasi)}</td>
+            <td>
+              <div class="d-flex justify-content-between small" style="font-size: 0.75rem;">
+                <span>${jv.pct}%</span>
+              </div>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar" style="width: ${Math.min(jv.pct, 100)}%; background-color: ${meta.color};"></div>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    html += `
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    const container = document.getElementById(meta.containerId);
+    if (container) {
+      container.innerHTML = html;
+    }
+  });
+
+  // Update badge filter year/quarter
+  const curYr = document.getElementById('year-filter').value;
+  const curQ = document.getElementById('quarter-filter').value;
+  const qStr = curQ === 'all' ? 'Semua Triwulan' : `Triwulan ${curQ}`;
+  const yrStr = curYr === 'all' ? 'Semua Tahun' : curYr;
+  const kanalBadge = document.getElementById('kanal-filter-badge');
+  if (kanalBadge) {
+    kanalBadge.textContent = `Filter: ${yrStr} | ${qStr}`;
+  }
 }
 
 async function loadData(year = null, quarter = null) {
