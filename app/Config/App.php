@@ -16,7 +16,7 @@ class App extends BaseConfig
      *
      * E.g., http://example.com/
      */
-    public string $baseURL = 'https://sidp.io/';
+    public string $baseURL = 'https://info.ajip-api.cloud/';
 
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
@@ -81,7 +81,7 @@ class App extends BaseConfig
     | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
     |
     */
-    public string $permittedURIChars = 'a-z 0-9~%.:_\-';
+    public string $permittedURIChars = 'a-z 0-~%.:_\-@';
 
     /**
      * --------------------------------------------------------------------------
@@ -133,7 +133,7 @@ class App extends BaseConfig
      * @see https://www.php.net/manual/en/timezones.php for list of timezones
      *      supported by PHP.
      */
-    public string $appTimezone = 'UTC';
+    public string $appTimezone = 'Asia/Makassar';
 
     /**
      * --------------------------------------------------------------------------
@@ -180,7 +180,12 @@ class App extends BaseConfig
      *
      * @var array<string, string>
      */
-    public array $proxyIPs = [];
+    public array $proxyIPs = [
+        '192.168.13.0/24' => 'X-Forwarded-For',
+        '192.168.13.12'   => 'X-Forwarded-For',
+        '192.168.13.2'    => 'X-Forwarded-For',
+        '127.0.0.1'       => 'X-Forwarded-For',
+    ];
 
     /**
      * --------------------------------------------------------------------------

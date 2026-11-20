@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend(service('request')->getUserAgent()->isMobile() ? 'layout/mobile_main' : 'layout/main') ?>
 
 <?= $this->section('content') ?>
 
@@ -42,6 +42,9 @@
                                 <option value="admin" <?= old('role') == 'admin' ? 'selected' : '' ?>>Admin</option>
                                 <option value="operator" <?= old('role') == 'operator' ? 'selected' : '' ?>>Operator</option>
                                 <option value="opd" <?= old('role') == 'opd' ? 'selected' : '' ?>>OPD</option>
+                                <option value="satker" <?= old('role') == 'satker' ? 'selected' : '' ?>>Satker</option>
+                                <option value="ppk" <?= old('role') == 'ppk' ? 'selected' : '' ?>>PPK (Pejabat Pembuat Komitmen)</option>
+                                <option value="user" <?= old('role') == 'user' ? 'selected' : '' ?>>User</option>
                             </select>
                         </div>
                         <div class="col-md-5 mb-3 d-none" id="opd-selection-container">
@@ -105,7 +108,7 @@
     }
 
     roleSelect.addEventListener('change', function() {
-        if (this.value === 'opd') {
+        if (this.value === 'opd' || this.value === 'satker') {
             opdContainer.classList.remove('d-none');
             satkerContainer.classList.remove('d-none');
             if (opdData.length === 0) fetchOpds();
@@ -121,7 +124,7 @@
     });
 
     // Handle initial state if validation fails and we have 'old' data
-    if (roleSelect.value === 'opd') {
+    if (roleSelect.value === 'opd' || roleSelect.value === 'satker') {
         opdContainer.classList.remove('d-none');
         satkerContainer.classList.remove('d-none');
         fetchOpds();

@@ -1,0 +1,40 @@
+# Blokir eksekusi semua file script di direktori uploads
+Options -Indexes -ExecCGI
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Tolak akses langsung ke file PHP/script apapun
+    RewriteRule \.(php|php3|php4|php5|php7|php8|phtml|phps|phar|inc|pl|py|cgi|sh|bash)$ - [F,NC,L]
+</IfModule>
+
+<FilesMatch "(?i)\.(php|php3|php4|php5|php7|php8|phtml|phps|phar|inc|pl|py|cgi|sh|bash)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+
+# Izinkan hanya tipe file yang aman
+<FilesMatch "(?i)\.(jpg|jpeg|png|gif|webp|pdf|doc|docx|xlsx|xls|csv|zip)$">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Allow from all
+    </IfModule>
+</FilesMatch>
+

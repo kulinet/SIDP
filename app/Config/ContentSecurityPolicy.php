@@ -59,14 +59,14 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $scriptSrc = 'self';
+    public $scriptSrc = ['self', 'unsafe-inline', 'unsafe-eval', 'https://cdn.jsdelivr.net', 'https://buttons.github.io', 'https://cdn.datatables.net', 'https://cdnjs.cloudflare.com', 'https://unpkg.com'];
 
     /**
      * Specifies valid sources for JavaScript <script> elements.
      *
      * @var list<string>|string
      */
-    public array|string $scriptSrcElem = 'self';
+    public array|string $scriptSrcElem = ['self', 'unsafe-inline', 'https://cdn.jsdelivr.net', 'https://buttons.github.io', 'https://cdn.datatables.net', 'https://cdnjs.cloudflare.com', 'https://unpkg.com'];
 
     /**
      * Specifies valid sources for JavaScript inline event
@@ -74,21 +74,21 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public array|string $scriptSrcAttr = 'self';
+    public array|string $scriptSrcAttr = ['self', 'unsafe-inline'];
 
     /**
      * Lists allowed stylesheets' URLs.
      *
      * @var list<string>|string
      */
-    public $styleSrc = 'self';
+    public $styleSrc = ['self', 'unsafe-inline', 'https://fonts.googleapis.com', 'https://cdn.jsdelivr.net', 'https://cdn.datatables.net', 'https://cdnjs.cloudflare.com', 'https://unpkg.com'];
 
     /**
      * Specifies valid sources for stylesheets <link> elements.
      *
      * @var list<string>|string
      */
-    public array|string $styleSrcElem = 'self';
+    public array|string $styleSrcElem = ['self', 'unsafe-inline', 'https://fonts.googleapis.com', 'https://cdn.jsdelivr.net', 'https://cdn.datatables.net', 'https://cdnjs.cloudflare.com', 'https://unpkg.com'];
 
     /**
      * Specifies valid sources for stylesheets inline
@@ -96,14 +96,29 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public array|string $styleSrcAttr = 'self';
+    public array|string $styleSrcAttr = ['self', 'unsafe-inline'];
 
     /**
      * Defines the origins from which images can be loaded.
      *
      * @var list<string>|string
      */
-    public $imageSrc = 'self';
+    public $imageSrc = [
+        'self',
+        'data:',
+        'blob:',
+        'https:',
+        'http://mt0.google.com',
+        'https://*.google.com',
+        'https://unpkg.com',
+        'https://*.tile.openstreetmap.org',
+        'https://tile.openstreetmap.org',
+        'https://*.tile.osm.org',
+        'https://*.basemaps.cartocdn.com',
+        'https://basemaps.cartocdn.com',
+        'https://ui-avatars.com',
+        'https://cdnjs.cloudflare.com',
+    ];
 
     /**
      * Restricts the URLs that can appear in a page's `<base>` element.
@@ -127,14 +142,23 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var list<string>|string
      */
-    public $connectSrc = 'self';
+    public $connectSrc = [
+        'self',
+        'https://cdn.jsdelivr.net',
+        'https://cdnjs.cloudflare.com',
+        'https://unpkg.com',
+        'https://*.tile.openstreetmap.org',
+        'https://tile.openstreetmap.org',
+        'https://*.basemaps.cartocdn.com',
+        'https://basemaps.cartocdn.com',
+    ];
 
     /**
      * Specifies the origins that can serve web fonts.
      *
      * @var list<string>|string
      */
-    public $fontSrc;
+    public $fontSrc = ['self', 'https://fonts.gstatic.com'];
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
@@ -212,5 +236,5 @@ class ContentSecurityPolicy extends BaseConfig
     /**
      * Replace nonce tag automatically?
      */
-    public bool $autoNonce = true;
+    public bool $autoNonce = false;
 }

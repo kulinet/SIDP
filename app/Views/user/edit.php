@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend(service('request')->getUserAgent()->isMobile() ? 'layout/mobile_main' : 'layout/main') ?>
 
 <?= $this->section('content') ?>
 
@@ -17,7 +17,7 @@
                     </div>
                 <?php endif; ?>
 
-                <form action="<?= base_url('user/update/'.$user['id']) ?>" method="POST">
+                <form action="<?= base_url('user/update/'.encode_id($user['id'])) ?>" method="POST">
                     <?= csrf_field() ?>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -42,15 +42,18 @@
                                 <option value="admin" <?= old('role', $user['role']) == 'admin' ? 'selected' : '' ?>>Admin</option>
                                 <option value="operator" <?= old('role', $user['role']) == 'operator' ? 'selected' : '' ?>>Operator</option>
                                 <option value="opd" <?= old('role', $user['role']) == 'opd' ? 'selected' : '' ?>>OPD</option>
+                                <option value="satker" <?= old('role', $user['role']) == 'satker' ? 'selected' : '' ?>>Satker</option>
+                                <option value="ppk" <?= old('role', $user['role']) == 'ppk' ? 'selected' : '' ?>>PPK (Pejabat Pembuat Komitmen)</option>
+                                <option value="user" <?= old('role', $user['role']) == 'user' ? 'selected' : '' ?>>User</option>
                             </select>
                         </div>
-                        <div class="col-md-5 mb-3 <?= $user['role'] !== 'opd' ? 'd-none' : '' ?>" id="opd-selection-container">
+                        <div class="col-md-5 mb-3 <?= ($user['role'] !== 'opd' && $user['role'] !== 'satker') ? 'd-none' : '' ?>" id="opd-selection-container">
                             <label class="form-label text-uppercase fw-bold small text-muted">Pilih OPD</label>
                             <select id="opd-dropdown" class="form-select">
                                 <option value="">-- Pilih OPD --</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-3 <?= $user['role'] !== 'opd' ? 'd-none' : '' ?>" id="satker-code-container">
+                        <div class="col-md-3 mb-3 <?= ($user['role'] !== 'opd' && $user['role'] !== 'satker') ? 'd-none' : '' ?>" id="satker-code-container">
                             <label class="form-label text-uppercase fw-bold small text-muted">Kode Satker</label>
                             <input type="text" name="kd_satker" id="kd_satker" class="form-control bg-light" value="<?= old('kd_satker', $user['kd_satker']) ?>" readonly>
                         </div>
@@ -106,7 +109,7 @@
     }
 
     roleSelect.addEventListener('change', function() {
-        if (this.value === 'opd') {
+        if (this.value === 'opd' || this.value === 'satker') {
             opdContainer.classList.remove('d-none');
             satkerContainer.classList.remove('d-none');
             if (opdData.length === 0) fetchOpds();
@@ -121,7 +124,7 @@
         kdSatkerInput.value = this.value;
     });
 
-    if (roleSelect.value === 'opd') {
+    if (roleSelect.value === 'opd' || roleSelect.value === 'satker') {
         fetchOpds();
     }
 </script>

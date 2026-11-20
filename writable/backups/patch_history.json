@@ -1,0 +1,1214 @@
+[
+    {
+        "patch_name": "patch_20260521_20260521_113141.zip",
+        "backup_file": "backup_before_patch_20260521_20260521_113141_20260521_113220.zip",
+        "applied_at": "2026-05-21 11:32:20",
+        "applied_by": "admin",
+        "file_count": 10,
+        "files": [
+            "app\/Services\/SyncService.php",
+            "app\/Config\/App.php",
+            "app\/Controllers\/PatchController.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/development\/patch_generate.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/dashboard\/table_lpse.php"
+        ]
+    },
+    {
+        "patch_name": "[ROLLBACK] backup_before_patch_20260521_20260521_113141_20260521_113220.zip",
+        "backup_file": null,
+        "applied_at": "2026-05-21 11:32:34",
+        "applied_by": "admin",
+        "file_count": 0,
+        "files": []
+    },
+    {
+        "patch_name": "patch_20260521_20260521_142318.zip",
+        "backup_file": "backup_before_patch_20260521_20260521_142318_20260521_142336.zip",
+        "applied_at": "2026-05-21 14:23:37",
+        "applied_by": "admin",
+        "file_count": 16,
+        "files": [
+            "app\/Views\/user\/logs.php",
+            "app\/Controllers\/UserLogController.php",
+            "app\/Config\/Routes.php",
+            "app\/Filters\/LogFilter.php",
+            "app\/Controllers\/PatchController.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Config\/Filters.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Models\/UserLogModel.php",
+            "app\/Database\/Migrations\/20260521000001_CreateUserLogsTable.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/development\/patch_generate.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/dashboard\/table_lpse.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_114012.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_114012_20260525_114031.zip",
+        "applied_at": "2026-05-25 11:40:32",
+        "applied_by": "admin",
+        "file_count": 32,
+        "files": [
+            "app\/Views\/components\/chatbot.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Views\/user\/api_settings.php",
+            "app\/Config\/Autoload.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Controllers\/Api.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Helpers\/auth_helper.php",
+            "app\/Views\/user\/permissions.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Views\/user\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Filters\/RbacFilter.php",
+            "app\/Models\/UserPermissionModel.php",
+            "app\/Database\/Migrations\/20260524000002_CreateUserPermissionsTable.php",
+            "app\/Services\/SyncService.php",
+            "app\/Models\/LpsePencatatanNontenderModel.php",
+            "app\/Database\/Migrations\/20260524000001_AddKetRealisasiToPencatatanNontender.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Controllers\/ChatbotKnowledge.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Views\/user\/chatbot_knowledge.php",
+            "app\/Database\/Migrations\/2026-05-22-000001_CreateMonevTables.php",
+            "app\/Models\/ChatbotKnowledgeModel.php",
+            "app\/Database\/Migrations\/2026-05-23-000001_CreateChatbotKnowledgeTable.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Views\/dashboard\/monev_summary.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "public\/assets\/img\/bot-avatar.png"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_121409.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_121409_20260525_121427.zip",
+        "applied_at": "2026-05-25 12:14:28",
+        "applied_by": "admin",
+        "file_count": 4,
+        "files": [
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php",
+            "app\/Controllers\/Chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_122052.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_122052_20260525_122106.zip",
+        "applied_at": "2026-05-25 12:21:07",
+        "applied_by": "admin",
+        "file_count": 8,
+        "files": [
+            "app\/Views\/dashboard\/monev_summary.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Models\/PpkRupMappingModel.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Models\/MonevHarianModel.php",
+            "app\/Models\/MonevDokumenModel.php",
+            "app\/Models\/MonevJadwalModel.php",
+            "app\/Models\/MonevProyekModel.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_130957.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_130957_20260525_131032.zip",
+        "applied_at": "2026-05-25 13:10:32",
+        "applied_by": "admin",
+        "file_count": 5,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_132116.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_132116_20260525_132126.zip",
+        "applied_at": "2026-05-25 13:21:26",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Controllers\/Dashboard.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_135154.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_135154_20260525_135209.zip",
+        "applied_at": "2026-05-25 13:52:09",
+        "applied_by": "admin",
+        "file_count": 11,
+        "files": [
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/index.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Helpers\/ajip_helper.php",
+            "app\/Config\/Routes.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_151152.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_151152_20260525_151205.zip",
+        "applied_at": "2026-05-25 15:12:05",
+        "applied_by": "admin",
+        "file_count": 13,
+        "files": [
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/index.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Helpers\/ajip_helper.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_180249.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_180249_20260525_180304.zip",
+        "applied_at": "2026-05-25 18:03:04",
+        "applied_by": "admin",
+        "file_count": 13,
+        "files": [
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/index.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Helpers\/ajip_helper.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_204400.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_204400_20260525_204428.zip",
+        "applied_at": "2026-05-25 20:44:28",
+        "applied_by": "admin",
+        "file_count": 15,
+        "files": [
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Config\/Routes.php",
+            "app\/Models\/MonevProyekModel.php",
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/index.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Helpers\/ajip_helper.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_205738.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_205738_20260525_205749.zip",
+        "applied_at": "2026-05-25 20:57:49",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Views\/dashboard\/monev_proyek.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260525_20260525_231625.zip",
+        "backup_file": "backup_before_patch_20260525_20260525_231625_20260525_231635.zip",
+        "applied_at": "2026-05-25 23:16:35",
+        "applied_by": "admin",
+        "file_count": 15,
+        "files": [
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Models\/MonevProyekModel.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/index.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Controllers\/BaseController.php",
+            "app\/Helpers\/ajip_helper.php",
+            "app\/Config\/Filters.php",
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260526_20260526_143208.zip",
+        "backup_file": "backup_before_patch_20260526_20260526_143208_20260526_143222.zip",
+        "applied_at": "2026-05-26 14:32:23",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Controllers\/ChatbotKnowledge.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260527_20260527_230835.zip",
+        "backup_file": "backup_before_patch_20260527_20260527_230835_20260527_230849.zip",
+        "applied_at": "2026-05-27 23:08:49",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260527_20260527_231501.zip",
+        "backup_file": "backup_before_patch_20260527_20260527_231501_20260527_231514.zip",
+        "applied_at": "2026-05-27 23:15:14",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260601_20260601_134808.zip",
+        "backup_file": "backup_before_patch_20260601_20260601_134808_20260601_134820.zip",
+        "applied_at": "2026-06-01 13:48:21",
+        "applied_by": "admin",
+        "file_count": 3,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Services\/SyncService.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260601_20260601_135332.zip",
+        "backup_file": "backup_before_patch_20260601_20260601_135332_20260601_135350.zip",
+        "applied_at": "2026-06-01 13:53:50",
+        "applied_by": "admin",
+        "file_count": 3,
+        "files": [
+            "app\/Controllers\/Chatbot.php",
+            "app\/Services\/SyncService.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260603_20260603_223740.zip",
+        "backup_file": "backup_before_patch_20260603_20260603_223740_20260603_223755.zip",
+        "applied_at": "2026-06-03 22:37:56",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Config\/Routes.php",
+            "app\/Controllers\/Api.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260605_20260605_160309.zip",
+        "backup_file": "backup_before_patch_20260605_20260605_160309_20260605_160327.zip",
+        "applied_at": "2026-06-05 16:03:28",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/dashboard\/table.php",
+            "app\/Controllers\/Dashboard.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260608_20260608_123655.zip",
+        "backup_file": "backup_before_patch_20260608_20260608_123655_20260608_123710.zip",
+        "applied_at": "2026-06-08 12:37:12",
+        "applied_by": "admin",
+        "file_count": 34,
+        "files": [
+            "app\/Views\/components\/chatbot.php",
+            "app\/Views\/layout\/mobile_main.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Views\/user\/index.php",
+            "app\/Views\/dashboard\/dynamic_table.php",
+            "app\/Views\/dashboard\/monev_summary.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/dashboard\/table_epurchasing.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Views\/report\/index.php",
+            "app\/Views\/dashboard\/statistik.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/dashboard\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/mobile_layanan.php",
+            "app\/Views\/dashboard\/mobile_index.php",
+            "app\/Views\/development\/charts.php",
+            "app\/Views\/development\/form.php",
+            "app\/Views\/development\/index.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/development\/patch_generate.php",
+            "app\/Views\/user\/api_settings.php",
+            "app\/Views\/user\/chatbot_knowledge.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Views\/user\/create.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/logs.php",
+            "app\/Views\/user\/permissions.php",
+            "app\/Views\/user\/rbac.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Views\/dashboard\/comparisons.php",
+            "app\/Views\/dashboard\/dashboard_lpse.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260608_20260608_124400.zip",
+        "backup_file": "backup_before_patch_20260608_20260608_124400_20260608_124416.zip",
+        "applied_at": "2026-06-08 12:44:16",
+        "applied_by": "admin",
+        "file_count": 34,
+        "files": [
+            "app\/Views\/dashboard\/mobile_index.php",
+            "app\/Views\/layout\/mobile_main.php",
+            "app\/Views\/components\/chatbot.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Views\/user\/index.php",
+            "app\/Views\/dashboard\/dynamic_table.php",
+            "app\/Views\/dashboard\/monev_summary.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/dashboard\/table_epurchasing.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Views\/report\/index.php",
+            "app\/Views\/dashboard\/statistik.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/dashboard\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/mobile_layanan.php",
+            "app\/Views\/development\/charts.php",
+            "app\/Views\/development\/form.php",
+            "app\/Views\/development\/index.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/development\/patch_generate.php",
+            "app\/Views\/user\/api_settings.php",
+            "app\/Views\/user\/chatbot_knowledge.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Views\/user\/create.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/logs.php",
+            "app\/Views\/user\/permissions.php",
+            "app\/Views\/user\/rbac.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Views\/dashboard\/comparisons.php",
+            "app\/Views\/dashboard\/dashboard_lpse.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260608_20260608_151453.zip",
+        "backup_file": "backup_before_patch_20260608_20260608_151453_20260608_151511.zip",
+        "applied_at": "2026-06-08 15:15:12",
+        "applied_by": "admin",
+        "file_count": 34,
+        "files": [
+            "app\/Views\/layout\/mobile_main.php",
+            "app\/Views\/dashboard\/mobile_index.php",
+            "app\/Views\/components\/chatbot.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Views\/user\/index.php",
+            "app\/Views\/dashboard\/dynamic_table.php",
+            "app\/Views\/dashboard\/monev_summary.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/dashboard\/table_epurchasing.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Views\/report\/index.php",
+            "app\/Views\/dashboard\/statistik.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/dashboard\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/mobile_layanan.php",
+            "app\/Views\/development\/charts.php",
+            "app\/Views\/development\/form.php",
+            "app\/Views\/development\/index.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/development\/patch_generate.php",
+            "app\/Views\/user\/api_settings.php",
+            "app\/Views\/user\/chatbot_knowledge.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Views\/user\/create.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/logs.php",
+            "app\/Views\/user\/permissions.php",
+            "app\/Views\/user\/rbac.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Views\/dashboard\/comparisons.php",
+            "app\/Views\/dashboard\/dashboard_lpse.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260608_20260608_155230.zip",
+        "backup_file": "backup_before_patch_20260608_20260608_155230_20260608_155242.zip",
+        "applied_at": "2026-06-08 15:52:42",
+        "applied_by": "admin",
+        "file_count": 35,
+        "files": [
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/layout\/mobile_main.php",
+            "app\/Views\/dashboard\/mobile_index.php",
+            "app\/Views\/components\/chatbot.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Views\/dashboard\/dashboard_epurchasing.php",
+            "app\/Views\/user\/index.php",
+            "app\/Views\/dashboard\/dynamic_table.php",
+            "app\/Views\/dashboard\/monev_summary.php",
+            "app\/Views\/dashboard\/rup_opd.php",
+            "app\/Views\/dashboard\/table_epurchasing.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Views\/report\/index.php",
+            "app\/Views\/dashboard\/statistik.php",
+            "app\/Views\/dashboard\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/mobile_layanan.php",
+            "app\/Views\/dashboard\/comparisons.php",
+            "app\/Views\/dashboard\/dashboard_lpse.php",
+            "app\/Views\/development\/charts.php",
+            "app\/Views\/development\/form.php",
+            "app\/Views\/development\/index.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/development\/patch_generate.php",
+            "app\/Views\/user\/api_settings.php",
+            "app\/Views\/user\/chatbot_knowledge.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Views\/user\/create.php",
+            "app\/Views\/user\/edit.php",
+            "app\/Views\/user\/logs.php",
+            "app\/Views\/user\/permissions.php",
+            "app\/Views\/user\/rbac.php",
+            "app\/Views\/user\/sync_settings.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260608_20260608_155908.zip",
+        "backup_file": "backup_before_patch_20260608_20260608_155908_20260608_155916.zip",
+        "applied_at": "2026-06-08 15:59:16",
+        "applied_by": "admin",
+        "file_count": 4,
+        "files": [
+            "app\/Views\/dashboard\/mobile_layanan.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/layout\/mobile_main.php",
+            "app\/Views\/dashboard\/mobile_index.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260609_20260609_145239.zip",
+        "backup_file": "backup_before_patch_20260609_20260609_145239_20260609_145252.zip",
+        "applied_at": "2026-06-09 14:52:53",
+        "applied_by": "admin",
+        "file_count": 12,
+        "files": [
+            "app\/Views\/profile\/index.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Views\/dashboard\/mobile_index.php",
+            "app\/Views\/profile\/mobile_index.php",
+            "app\/Controllers\/Profile.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Models\/UserModel.php",
+            "app\/Database\/Migrations\/2026-06-09-000002_AddAvatarToUsers.php",
+            "app\/Views\/dashboard\/mobile_layanan.php",
+            "app\/Config\/Routes.php",
+            "app\/Database\/Migrations\/2026-06-09-000001_AddContactInfoToUsers.php",
+            "public\/uploads\/avatars\/1780987830_e5cfc6ed1100cf56152c.jpeg"
+        ]
+    },
+    {
+        "patch_name": "patch_20260610_20260610_091813.zip",
+        "backup_file": "backup_before_patch_20260610_20260610_091813_20260610_091825.zip",
+        "applied_at": "2026-06-10 09:18:25",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260610_20260610_092103.zip",
+        "backup_file": "backup_before_patch_20260610_20260610_092103_20260610_092115.zip",
+        "applied_at": "2026-06-10 09:21:15",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260610_20260610_092338.zip",
+        "backup_file": "backup_before_patch_20260610_20260610_092338_20260610_092346.zip",
+        "applied_at": "2026-06-10 09:23:46",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260610_20260610_093028.zip",
+        "backup_file": "backup_before_patch_20260610_20260610_093028_20260610_093036.zip",
+        "applied_at": "2026-06-10 09:30:36",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/components\/chatbot.php",
+            "public\/debug_chat.log"
+        ]
+    },
+    {
+        "patch_name": "patch_20260701_20260701_192234.zip",
+        "backup_file": "backup_before_patch_20260701_20260701_192234_20260701_192303.zip",
+        "applied_at": "2026-07-01 19:23:04",
+        "applied_by": "admin",
+        "file_count": 5,
+        "files": [
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/penyedia_katalog.php",
+            "app\/Controllers\/Dashboard.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260701_20260701_192413.zip",
+        "backup_file": "backup_before_patch_20260701_20260701_192413_20260701_192428.zip",
+        "applied_at": "2026-07-01 19:24:28",
+        "applied_by": "admin",
+        "file_count": 9,
+        "files": [
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/penyedia_katalog.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Filters\/RbacFilter.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260701_20260701_192538.zip",
+        "backup_file": "backup_before_patch_20260701_20260701_192538_20260701_192551.zip",
+        "applied_at": "2026-07-01 19:25:51",
+        "applied_by": "admin",
+        "file_count": 11,
+        "files": [
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/penyedia_katalog.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Filters\/RbacFilter.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/layout\/main.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260701_20260701_193332.zip",
+        "backup_file": "backup_before_patch_20260701_20260701_193332_20260701_193344.zip",
+        "applied_at": "2026-07-01 19:33:44",
+        "applied_by": "admin",
+        "file_count": 8,
+        "files": [
+            "app\/Controllers\/PatchController.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/penyedia_katalog.php",
+            "app\/Controllers\/Dashboard.php"
+        ]
+    },
+    {
+        "patch_name": "patch_20260701_20260701_193332.zip",
+        "backup_file": "backup_before_patch_20260701_20260701_193332_20260701_194133.zip",
+        "applied_at": "2026-07-01 19:41:33",
+        "applied_by": "admin",
+        "file_count": 8,
+        "files": [
+            "app\/Controllers\/PatchController.php",
+            "app\/Views\/development\/patch.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/penyedia_katalog.php",
+            "app\/Controllers\/Dashboard.php"
+        ],
+        "app_version": "V1.07.05"
+    },
+    {
+        "patch_name": "patch_20260702_20260702_094016.zip",
+        "backup_file": "backup_before_patch_20260702_20260702_094016_20260702_094033.zip",
+        "applied_at": "2026-07-02 09:40:33",
+        "applied_by": "admin",
+        "file_count": 4,
+        "files": [
+            "app\/Views\/dashboard\/detail_penyedia.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Config\/Routes.php"
+        ],
+        "app_version": "V1.07.06"
+    },
+    {
+        "patch_name": "patch_20260707_20260707_070819.zip",
+        "backup_file": "backup_before_patch_20260707_20260707_070819_20260707_070837.zip",
+        "applied_at": "2026-07-07 07:08:38",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.07.07"
+    },
+    {
+        "patch_name": "patch_20260707_20260707_215045.zip",
+        "backup_file": "backup_before_patch_20260707_20260707_215045_20260707_215109.zip",
+        "applied_at": "2026-07-07 21:51:10",
+        "applied_by": "admin",
+        "file_count": 9,
+        "files": [
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Views\/dashboard\/monev_opd.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Config\/Routes.php",
+            "app\/Controllers\/Chatbot.php",
+            "public\/debug_chat.log"
+        ],
+        "app_version": "V1.07.08"
+    },
+    {
+        "patch_name": "patch_20260707_20260707_232458.zip",
+        "backup_file": "backup_before_patch_20260707_20260707_232458_20260707_232515.zip",
+        "applied_at": "2026-07-07 23:25:16",
+        "applied_by": "admin",
+        "file_count": 9,
+        "files": [
+            "app\/Controllers\/Chatbot.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Views\/dashboard\/monev_opd.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Config\/Routes.php",
+            "public\/debug_chat.log"
+        ],
+        "app_version": "V1.07.09"
+    },
+    {
+        "patch_name": "patch_20260707_20260707_233014.zip",
+        "backup_file": "backup_before_patch_20260707_20260707_233014_20260707_233029.zip",
+        "applied_at": "2026-07-07 23:30:29",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.07.10"
+    },
+    {
+        "patch_name": "patch_20260707_20260707_233208.zip",
+        "backup_file": "backup_before_patch_20260707_20260707_233208_20260707_233228.zip",
+        "applied_at": "2026-07-07 23:32:28",
+        "applied_by": "admin",
+        "file_count": 9,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Views\/dashboard\/monev_opd.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Config\/Routes.php"
+        ],
+        "app_version": "V1.07.11"
+    },
+    {
+        "patch_name": "patch_20260712_20260712_000820.zip",
+        "backup_file": "backup_before_patch_20260712_20260712_000820_20260712_000841.zip",
+        "applied_at": "2026-07-12 00:08:41",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/dashboard\/monev_opd.php",
+            "public\/debug_chat.log"
+        ],
+        "app_version": "V1.07.12"
+    },
+    {
+        "patch_name": "patch_20260713_20260713_232015.zip",
+        "backup_file": "backup_before_patch_20260713_20260713_232015_20260713_232034.zip",
+        "applied_at": "2026-07-13 23:20:34",
+        "applied_by": "admin",
+        "file_count": 8,
+        "files": [
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Services\/SyncService.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Commands\/SyncVendorDetails.php",
+            "app\/Database\/Migrations\/20260713000001_CreateInaprocVendorSyncTable.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Models\/InaprocVendorSyncModel.php",
+            "app\/Services\/InaprocApiService.php"
+        ],
+        "app_version": "V1.07.13"
+    },
+    {
+        "patch_name": "patch_20260713_20260713_232754.zip",
+        "backup_file": "backup_before_patch_20260713_20260713_232754_20260713_232810.zip",
+        "applied_at": "2026-07-13 23:28:10",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Controllers\/SettingsController.php",
+            "app\/Views\/user\/sync_settings.php"
+        ],
+        "app_version": "V1.07.14"
+    },
+    {
+        "patch_name": "patch_20260713_20260713_235014.zip",
+        "backup_file": "backup_before_patch_20260713_20260713_235014_20260713_235028.zip",
+        "applied_at": "2026-07-13 23:50:28",
+        "applied_by": "admin",
+        "file_count": 4,
+        "files": [
+            "app\/Models\/ChatbotLogModel.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "public\/debug_chat.log",
+            "public\/get_settings.php"
+        ],
+        "app_version": "V1.07.15"
+    },
+    {
+        "patch_name": "patch_20260713_20260713_235514.zip",
+        "backup_file": "backup_before_patch_20260713_20260713_235514_20260713_235527.zip",
+        "applied_at": "2026-07-13 23:55:27",
+        "applied_by": "admin",
+        "file_count": 19,
+        "files": [
+            "app\/Controllers\/SettingsController.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Services\/SyncService.php",
+            "app\/Commands\/SyncVendorDetails.php",
+            "app\/Database\/Migrations\/20260713000001_CreateInaprocVendorSyncTable.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Models\/InaprocVendorSyncModel.php",
+            "app\/Services\/InaprocApiService.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Models\/ChatbotLogModel.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Config\/Routes.php",
+            "app\/Views\/dashboard\/monev_opd.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Views\/layout\/main.php",
+            "public\/debug_chat.log",
+            "public\/get_settings.php"
+        ],
+        "app_version": "V1.07.16"
+    },
+    {
+        "patch_name": "patch_20260714_20260714_001338.zip",
+        "backup_file": "backup_before_patch_20260714_20260714_001338_20260714_001352.zip",
+        "applied_at": "2026-07-14 00:13:52",
+        "applied_by": "admin",
+        "file_count": 3,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Views\/components\/chatbot.php"
+        ],
+        "app_version": "V1.07.17"
+    },
+    {
+        "patch_name": "patch_20260718_20260718_220304.zip",
+        "backup_file": "backup_before_patch_20260718_20260718_220304_20260718_220317.zip",
+        "applied_at": "2026-07-18 22:03:17",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.07.18"
+    },
+    {
+        "patch_name": "patch_20260718_20260718_220513.zip",
+        "backup_file": "backup_before_patch_20260718_20260718_220513_20260718_220525.zip",
+        "applied_at": "2026-07-18 22:05:25",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.07.19"
+    },
+    {
+        "patch_name": "patch_20260811_20260811_144037.zip",
+        "backup_file": "backup_before_patch_20260811_20260811_144037_20260811_144435.zip",
+        "applied_at": "2026-08-11 14:44:36",
+        "applied_by": "admin",
+        "file_count": 55,
+        "files": [
+            "app\/Views\/auth\/login.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Services\/SyncService.php",
+            "app\/Models\/RupPenyediaModel.php",
+            "app\/Config\/ContentSecurityPolicy.php",
+            "app\/Controllers\/Api.php",
+            "app\/Filters\/ApiAuthFilter.php",
+            "app\/Controllers\/ChatbotKnowledge.php",
+            "app\/Controllers\/PatchController.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Filters\/RbacFilter.php",
+            "app\/Config\/Filters.php",
+            "app\/Config\/Routes.php",
+            "app\/Controllers\/Profile.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Filters\/LoginThrottleFilter.php",
+            "app\/Config\/Session.php",
+            "app\/Config\/Cookie.php",
+            "app\/Config\/App.php",
+            "app\/Config\/Security.php",
+            "app\/Database\/Migrations\/add_pdn_umk_nontender.sql",
+            "app\/Database\/Migrations\/2026-07-21-000001_AddPdnUmkToLpseNontender.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Models\/LpseNontenderModel.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Views\/user\/sync_settings.php",
+            "app\/Commands\/SyncVendorDetails.php",
+            "app\/Database\/Migrations\/20260713000001_CreateInaprocVendorSyncTable.php",
+            "app\/Models\/InaprocVendorSyncModel.php",
+            "app\/Services\/InaprocApiService.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Models\/ChatbotLogModel.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Views\/dashboard\/monev_opd.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Views\/layout\/main.php",
+            "public\/assets\/css\/login-premium.css",
+            "public\/alter.php",
+            "public\/assets\/js\/login-premium.js",
+            "public\/robots.txt",
+            "public\/uploads\/.htaccess",
+            "public\/.htaccess",
+            "public\/uploads\/monev\/1784508310_77d6b3baefd98fb058ad.jpeg",
+            "public\/uploads\/monev\/1784508310_d1c0f43049e0e8f54024.jpg",
+            "public\/uploads\/monev\/1784508310_f12c7564ea617cebe4c7.jpeg",
+            "public\/uploads\/monev\/1784508062_46d33b3567cf55d05c5d.png",
+            "public\/uploads\/monev\/1784508062_b3b4231eadce28d7b1ca.jpeg",
+            "public\/uploads\/monev\/1784508062_f9c5ab1b349df6d2b436.png",
+            "public\/uploads\/monev\/1784507185_315dff189367d691b38b.png",
+            "public\/uploads\/monev\/1784507185_b02aba9c9b1a35acd94a.png",
+            "public\/uploads\/monev\/1784507185_bdc612660acd9eac89b8.png"
+        ],
+        "app_version": "V1.08.01"
+    },
+    {
+        "patch_name": "patch_20260812_20260812_113818.zip",
+        "backup_file": "backup_before_patch_20260812_20260812_113818_20260812_114911.zip",
+        "applied_at": "2026-08-12 11:49:12",
+        "applied_by": "admin",
+        "file_count": 25,
+        "files": [
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/report\/index.php",
+            "app\/Controllers\/Report.php",
+            "app\/Views\/dashboard\/table_epurchasing.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Views\/user\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Views\/auth\/2fa_challenge.php",
+            "app\/Views\/auth\/2fa_setup.php",
+            "app\/Controllers\/TwoFactorAuth.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Models\/UserModel.php",
+            "app\/Database\/Migrations\/20260812000000_AddGoogle2faSecretToUsers.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Services\/SyncService.php",
+            "app\/Models\/RupPenyediaModel.php",
+            "app\/Config\/Session.php",
+            "app\/Config\/Cookie.php",
+            "app\/Config\/App.php",
+            "public\/uploads\/avatars\/1786501623_bb5d8dcb43816ad00f80.png",
+            "public\/.user.ini"
+        ],
+        "app_version": "V1.08.02"
+    },
+    {
+        "patch_name": "patch_20260812_20260812_152727.zip",
+        "backup_file": "backup_before_patch_20260812_20260812_152727_20260812_152736.zip",
+        "applied_at": "2026-08-12 15:27:36",
+        "applied_by": "admin",
+        "file_count": 20,
+        "files": [
+            "app\/Views\/layout\/main.php",
+            "app\/Controllers\/UserPermissionController.php",
+            "app\/Controllers\/RbacController.php",
+            "app\/Controllers\/Chatbot.php",
+            "app\/Views\/user\/chatbot_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Models\/RolePermissionModel.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/report\/index.php",
+            "app\/Controllers\/Report.php",
+            "app\/Views\/dashboard\/table_epurchasing.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Views\/user\/index.php",
+            "app\/Config\/Routes.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Views\/auth\/2fa_challenge.php",
+            "app\/Views\/auth\/2fa_setup.php",
+            "app\/Controllers\/TwoFactorAuth.php",
+            "app\/Models\/UserModel.php"
+        ],
+        "app_version": "V1.08.03"
+    },
+    {
+        "patch_name": "patch_20260812_20260812_154107.zip",
+        "backup_file": "backup_before_patch_20260812_20260812_154107_20260812_154121.zip",
+        "applied_at": "2026-08-12 15:41:21",
+        "applied_by": "admin",
+        "file_count": 3,
+        "files": [
+            "app\/Controllers\/Chatbot.php",
+            "public\/debug_chat.log",
+            "public\/uploads\/avatars\/1786501623_bb5d8dcb43816ad00f80.png"
+        ],
+        "app_version": "V1.08.04"
+    },
+    {
+        "patch_name": "patch_20260812_20260812_160225.zip",
+        "backup_file": "backup_before_patch_20260812_20260812_160225_20260812_160238.zip",
+        "applied_at": "2026-08-12 16:02:38",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.08.05"
+    },
+    {
+        "patch_name": "patch_20260813_20260813_084745.zip",
+        "backup_file": "backup_before_patch_20260813_20260813_084745_20260813_084830.zip",
+        "applied_at": "2026-08-13 08:48:30",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "app\/Views\/layout\/main.php",
+            "app\/Views\/errors\/html\/error_403.php"
+        ],
+        "app_version": "V1.08.06"
+    },
+    {
+        "patch_name": "patch_20260813_20260813_093715.zip",
+        "backup_file": "backup_before_patch_20260813_20260813_093715_20260813_093800.zip",
+        "applied_at": "2026-08-13 09:38:00",
+        "applied_by": "admin",
+        "file_count": 5,
+        "files": [
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Config\/ContentSecurityPolicy.php",
+            "app\/Filters\/RbacFilter.php",
+            "app\/Views\/layout\/main.php",
+            "app\/Views\/errors\/html\/error_403.php"
+        ],
+        "app_version": "V1.08.07"
+    },
+    {
+        "patch_name": "patch_20260813_20260813_155008.zip",
+        "backup_file": "backup_before_patch_20260813_20260813_155008_20260813_155019.zip",
+        "applied_at": "2026-08-13 15:50:19",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.08.08"
+    },
+    {
+        "patch_name": "patch_20260818_20260818_102142.zip",
+        "backup_file": "backup_before_patch_20260818_20260818_102142_20260818_102151.zip",
+        "applied_at": "2026-08-18 10:21:51",
+        "applied_by": "admin",
+        "file_count": 2,
+        "files": [
+            "public\/debug_chat.log",
+            "app\/Controllers\/Chatbot.php"
+        ],
+        "app_version": "V1.08.09"
+    },
+    {
+        "patch_name": "patch_20260818_20260818_102826.zip",
+        "backup_file": "backup_before_patch_20260818_20260818_102826_20260818_102832.zip",
+        "applied_at": "2026-08-18 10:28:32",
+        "applied_by": "admin",
+        "file_count": 1,
+        "files": [
+            "app\/Controllers\/ChatbotKnowledge.php"
+        ],
+        "app_version": "V1.08.10"
+    },
+    {
+        "patch_name": "patch_20260818_20260818_152156.zip",
+        "backup_file": "backup_before_patch_20260818_20260818_152156_20260818_152215.zip",
+        "applied_at": "2026-08-18 15:22:16",
+        "applied_by": "admin",
+        "file_count": 6,
+        "files": [
+            "app\/Views\/dashboard\/statistik.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Views\/dashboard\/table.php",
+            "app\/Controllers\/ChatbotKnowledge.php",
+            "app\/Controllers\/Chatbot.php",
+            "public\/debug_chat.log"
+        ],
+        "app_version": "V1.08.11"
+    },
+    {
+        "patch_name": "patch_20260824_20260824_115120.zip",
+        "backup_file": "backup_before_patch_20260824_20260824_115120_20260824_115228.zip",
+        "applied_at": "2026-08-24 11:52:28",
+        "applied_by": "admin",
+        "file_count": 7,
+        "files": [
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Models\/LpseTenderModel.php",
+            "app\/Database\/Migrations\/2026-08-24-000002_AddSumberDanaToRupPenyediaAndLpseTender.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Database\/Migrations\/2026-08-24-000001_AddMonevFieldsToLpseTender.php"
+        ],
+        "app_version": "V1.08.12"
+    },
+    {
+        "patch_name": "patch_20260824_20260824_133054.zip",
+        "backup_file": "backup_before_patch_20260824_20260824_133054_20260824_133111.zip",
+        "applied_at": "2026-08-24 13:31:12",
+        "applied_by": "admin",
+        "file_count": 8,
+        "files": [
+            "app\/Config\/ContentSecurityPolicy.php",
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Services\/SyncService.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Models\/LpseTenderModel.php",
+            "app\/Database\/Migrations\/2026-08-24-000002_AddSumberDanaToRupPenyediaAndLpseTender.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Database\/Migrations\/2026-08-24-000001_AddMonevFieldsToLpseTender.php"
+        ],
+        "app_version": "V1.08.13"
+    },
+    {
+        "patch_name": "patch_20260824_20260824_141013.zip",
+        "backup_file": "backup_before_patch_20260824_20260824_141013_20260824_141029.zip",
+        "applied_at": "2026-08-24 14:10:29",
+        "applied_by": "admin",
+        "file_count": 10,
+        "files": [
+            "app\/Views\/dashboard\/table_lpse.php",
+            "app\/Services\/SyncService.php",
+            "app\/Controllers\/Dashboard.php",
+            "app\/Models\/LpseNontenderModel.php",
+            "app\/Database\/Migrations\/2026-08-24-000003_AddMonevFieldsToLpseNontender.php",
+            "app\/Config\/ContentSecurityPolicy.php",
+            "app\/Views\/dashboard\/monev_proyek.php",
+            "app\/Models\/LpseTenderModel.php",
+            "app\/Database\/Migrations\/2026-08-24-000002_AddSumberDanaToRupPenyediaAndLpseTender.php",
+            "app\/Database\/Migrations\/2026-08-24-000001_AddMonevFieldsToLpseTender.php"
+        ],
+        "app_version": "V1.08.14"
+    },
+    {
+        "patch_name": "patch_20260827_20260827_093205.zip",
+        "backup_file": "backup_before_patch_20260827_20260827_093205_20260827_093215.zip",
+        "applied_at": "2026-08-27 09:32:15",
+        "applied_by": "admin",
+        "file_count": 15,
+        "files": [
+            "public\/.well-known\/acme-challenge\/kpw3NgWyhtfNk2t0fuuwraCYeGpA4tx3yaZrKulsySE",
+            "app\/Config\/Cors.php",
+            "app\/Views\/user\/api_settings.php",
+            "app\/Controllers\/SettingsController.php",
+            "app\/Filters\/ApiAuthFilter.php",
+            "app\/Controllers\/TwoFactorAuth.php",
+            "app\/Controllers\/Auth.php",
+            "app\/Controllers\/Profile.php",
+            "app\/Controllers\/UserController.php",
+            "app\/Config\/Routes.php",
+            "app\/Config\/Filters.php",
+            "app\/Filters\/SecureHeaders.php",
+            "app\/Filters\/ApiThrottleFilter.php",
+            "app\/Controllers\/Api.php",
+            "app\/Controllers\/Dashboard.php"
+        ],
+        "app_version": "V1.08.15"
+    }
+]

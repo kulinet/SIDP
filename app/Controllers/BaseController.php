@@ -34,12 +34,42 @@ abstract class BaseController extends Controller
     {
         // Load here all helpers you want to be available in your controllers that extend BaseController.
         // Caution: Do not put the this below the parent::initController() call below.
-        // $this->helpers = ['form', 'url'];
+        $this->helpers = ['form', 'url', 'auth', 'ajip'];
 
         // Caution: Do not edit this line.
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
         // $this->session = service('session');
+    }
+
+    /**
+     * Log user activity
+     * 
+     * @param string $action Description of the action performed
+     * @param string|null $username Optional username (if not logged in)
+     */
+    protected function logActivity(string $action, ?string $username = null)
+    {
+        $logModel = new \App\Models\UserLogModel();
+        
+        $session = session();
+        $user_id = $session->get('id');
+        $user_role = $session->get('role');
+        
+        // If username not provided, get from session
+        if ($username === null) {
+            $username = $session->get('username') ?? 'Guest';
+        }
+
+        $logModel->insert([
+            'user_id'    => $user_id,
+            'username'   => $username,
+            'role'       => $user_role,
+            'action'     => $action,
+            'ip_address' => $this->request->getIPAddress(),
+            'user_agent' => $this->request->getUserAgent()->getAgentString(),
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
     }
 }

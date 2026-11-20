@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend(service('request')->getUserAgent()->isMobile() ? 'layout/mobile_main' : 'layout/main') ?>
 <?= $this->section('content') ?>
 
 <div class="container-xxl flex-grow-1 container-p-y">

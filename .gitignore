@@ -18,6 +18,9 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
+# Zip releases and packages
+*.zip
+
 # Windows Installer files
 *.cab
 *.msi
@@ -65,6 +68,11 @@ writable/debugbar/*
 
 php_errors.log
 
+# Database dumps
+/*.sql
+*.sql.gz
+*.sql.zip
+
 #-------------------------
 # User Guide Temp Files
 #-------------------------
@@ -80,6 +88,13 @@ tests/coverage*
 
 # Don't save phpunit under version control.
 phpunit
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Browser Profile Cache
+writable/browser_profile_spse/
 
 #-------------------------
 # Composer

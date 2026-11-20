@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend(service('request')->getUserAgent()->isMobile() ? 'layout/mobile_main' : 'layout/main') ?>
 
 <?= $this->section('content') ?>
 
@@ -41,6 +41,21 @@
                 </thead>
                 <tbody></tbody>
             </table>
+    <style>
+        /* Mobile datatable adjustments */
+        @media (max-width: 768px) {
+            .dt-buttons {
+                display: flex;
+                width: 100%;
+                gap: 8px;
+            }
+            .dt-buttons .btn {
+                flex: 1;
+                margin-right: 0 !important;
+                padding: 8px 5px !important;
+            }
+        }
+    </style>
         </div>
     </div>
 </div>
@@ -88,12 +103,13 @@
                 },
                 <?php endforeach; ?>
             ],
-            dom: '<"d-flex justify-content-between align-items-center mb-3"Bl>rtip',
+            dom: '<"d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2"Bl>rtip',
             buttons: [
                 {
                     extend: 'excelHtml5',
                     text: '<i class="far fa-file-excel mr-1"></i> Export Excel',
                     title: `Data <?= $menu['name'] ?>`,
+                    messageTop: () => `Tanggal Export: ${new Date().toLocaleString('id-ID')}`,
                     className: 'btn btn-outline-success btn-sm me-2',
                     action: function(e, dt, node, config) {
                         runSmartExport.call(this, e, dt, node, config);
@@ -103,6 +119,7 @@
                     extend: 'pdfHtml5',
                     text: '<i class="far fa-file-pdf mr-1"></i> Export PDF',
                     title: `Data <?= $menu['name'] ?>`,
+                    messageTop: () => `Tanggal Export: ${new Date().toLocaleString('id-ID')}`,
                     orientation: 'landscape',
                     pageSize: 'A3',
                     className: 'btn btn-outline-danger btn-sm',

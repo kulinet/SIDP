@@ -1,0 +1,12 @@
+{
+  "php_cli_version": "PHP 8.2.28 (cli) (built: May  9 2025 03:18:55) (NTS)\nCopyright (c) The PHP Group\nZend Engine v4.2.28, Copyright (c) Zend Technologies",
+  "php_fpm_version": "PHP 8.4.27 (cli) (built: Oct 22 2026 19:11:53) (NTS)\nCopyright (c) The PHP Group\nZend Engine v4.4.27, Copyright (c) Zend Technologies",
+  "php_fpm_socket": "srw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-53.sock\nsrw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-54.sock\nsrw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-56.sock\nsrw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-73.sock\nsrw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-74.sock\nsrw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-80.sock\nsrw-rw-rw- 1 www www 0 Oct 22 19:47 /tmp/php-cgi-81.sock\nsrw-rw-rw- 1 www www 0 Aug 28 09:00 /tmp/php-cgi-82.sock\nsrw------- 1 www www 0 Oct 22 19:17 /tmp/php-cgi-84.sock",
+  "ci4_version": "\"name\": \"codeigniter4/framework\",\n            \"version\": \"v4.7.0\",\n            \"source\": {",
+  "php84_ini_security": "allow_url_include => Off => Off\ndisable_functions => no value => no value\ndisplay_errors => STDOUT => STDOUT\nexpose_php => Off => Off\nopen_basedir => no value => no value\nsession.cookie_httponly => Off => Off\nsession.cookie_secure => Off => Off",
+  "env_security": "CI_ENVIRONMENT = production\ndatabase.default.hostname = localhost\ndatabase.default.username = NeGCyawanHMGrhjm\ndatabase.default.password = c3tXJhCYFj3Ec7cC",
+  "nginx_php_conf": "location ~ [^/]\\.php(/|$)\n    {\n        try_files $uri =404;\n        fastcgi_pass  unix:/tmp/php-cgi-84.sock;\n        fastcgi_index index.php;\n        include fastcgi.conf;\n        include pathinfo.conf;\n    }",
+  "nginx_deny_uploads": "NOT_FOUND",
+  "upload_dir_writable": "drwxr-xr-x 4 www www 4096 Aug 11 14:44 /www/wwwroot/info.ajip-api.cloud/sidp/public/uploads",
+  "check_cve_php_cgi": "php-cgi exists"
+}

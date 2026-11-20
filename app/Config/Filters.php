@@ -13,6 +13,7 @@ use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
 
+// Updated: 2026-05-25
 class Filters extends BaseFilters
 {
     /**
@@ -25,19 +26,24 @@ class Filters extends BaseFilters
      * or [filter_name => [classname1, classname2, ...]]
      */
     public array $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'cors'          => Cors::class,
-        'forcehttps'    => ForceHTTPS::class,
-        'pagecache'     => PageCache::class,
-        'performance'   => PerformanceMetrics::class,
-        'auth'          => \App\Filters\AuthFilter::class,
-        'admin'         => \App\Filters\AdminFilter::class,
-        'operator'      => \App\Filters\OperatorFilter::class,
-        'dynamic_access'=> \App\Filters\DynamicAccessFilter::class,
+        'csrf'           => CSRF::class,
+        'toolbar'        => DebugToolbar::class,
+        'honeypot'       => Honeypot::class,
+        'invalidchars'   => InvalidChars::class,
+        'secureheaders'  => \App\Filters\SecureHeaders::class,
+        'cors'           => Cors::class,
+        'forcehttps'     => ForceHTTPS::class,
+        'pagecache'      => PageCache::class,
+        'performance'    => PerformanceMetrics::class,
+        'auth'           => \App\Filters\AuthFilter::class,
+        'admin'          => \App\Filters\AdminFilter::class,
+        'operator'       => \App\Filters\OperatorFilter::class,
+        'dynamic_access' => \App\Filters\DynamicAccessFilter::class,
+        'userlog'        => \App\Filters\LogFilter::class,
+        'rbac'           => \App\Filters\RbacFilter::class,
+        'api_auth'       => \App\Filters\ApiAuthFilter::class,
+        'api_throttle'   => \App\Filters\ApiThrottleFilter::class,
+        'login_throttle' => \App\Filters\LoginThrottleFilter::class,
     ];
 
 
@@ -56,13 +62,12 @@ class Filters extends BaseFilters
      */
     public array $required = [
         'before' => [
-            // 'forcehttps', // Force Global Secure Requests
+            // 'forcehttps', // Force Global Secure Requests (dinonaktifkan untuk mencegah redirect loop di balik Cloudflare / Reverse Proxy)
             'pagecache',  // Web Page Caching
         ],
         'after' => [
             'pagecache',   // Web Page Caching
             'performance', // Performance Metrics
-            // 'toolbar',     // Debug Toolbar
         ],
     ];
 
@@ -78,13 +83,27 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             // 'honeypot',
-            'csrf' => ['except' => ['development/*', 'api/*', 'chatbot/*']],
+            'csrf' => ['except' => [
+                'api/*', 
+                'chatbot/*', 
+                'report/*',
+                'dashboard/monev/*',
+                'dashboard/monev-v2/*',
+                'dashboard/add-monev-paket',
+                'dashboard/remove-monev-paket/*',
+                'dashboard/do-launch-bot-spse',
+                'dashboard/stop-bot-spse',
+                'dashboard/do-launch-bot-lpjk',
+                'dashboard/stop-bot-lpjk',
+                'dashboard/detectDomisiliAi',
+                'user/api-settings/test-connection',
+            ]],
             'invalidchars',
         ],
 
         'after' => [
-            // 'honeypot',
-            // 'secureheaders',
+            'secureheaders',
+            'userlog',
         ],
     ];
 
@@ -112,5 +131,7 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'api/*' => ['before' => ['api_throttle']],
+    ];
 }

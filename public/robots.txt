@@ -1,2 +1,10 @@
 User-agent: *
-Disallow: 
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /uploads/
+Disallow: /report/
+Disallow: /user/
+Disallow: /profile/
+Disallow: /patch/
+Disallow: /settings/

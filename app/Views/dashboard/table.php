@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?><?= $this->section('content') ?>
+<?= $this->extend(service('request')->getUserAgent()->isMobile() ? 'layout/mobile_main' : 'layout/main') ?><?= $this->section('content') ?>
 
 <!-- DataTables CSS CDN -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
@@ -17,10 +17,31 @@
     .col-satker { min-width: 200px !important; }
     .col-pagu { width: 130px !important; }
     .col-uraian { min-width: 300px !important; }
+    .col-spesifikasi { min-width: 300px !important; }
+    .col-mak { min-width: 180px !important; }
+    
+    /* Mobile datatable adjustments */
+    @media (max-width: 768px) {
+        .col-paket { min-width: 180px !important; }
+        .col-satker { min-width: 140px !important; }
+        .col-uraian { min-width: 200px !important; }
+        .col-spesifikasi { min-width: 200px !important; }
+        .col-mak { min-width: 130px !important; }
+        .dt-buttons {
+            display: flex;
+            width: 100%;
+            gap: 8px;
+        }
+        .dt-buttons .btn {
+            flex: 1;
+            margin-right: 0 !important;
+            padding: 8px 5px !important;
+        }
+    }
 </style>
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-3">
         <h4 class="fw-bold py-3 mb-0">
             <span class="text-muted fw-light">Data RUP /</span> <?= ucfirst($type) ?>
         </h4>
@@ -33,11 +54,34 @@
 
     <div class="card mb-4">
     <div class="card-body">
-        <div class="row align-items-end">
+        <div class="row align-items-end mb-3">
             <div class="col-md-3 mb-3 mb-md-0">
                 <div class="mb-0">
                     <label class="form-label text-uppercase fw-bold small text-muted">Pencarian</label>
                     <input type="text" id="custom-search" placeholder="Cari Paket..." class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <div class="mb-0">
+                    <label class="form-label text-uppercase fw-bold small text-muted">Tahun Anggaran</label>
+                    <select id="filter-year" class="form-select">
+                        <?php 
+                        $curYear = date('Y');
+                        if (isset($availableYears) && !empty($availableYears)) {
+                            foreach($availableYears as $yr): 
+                        ?>
+                        <option value="<?= $yr ?>" <?= $yr == $curYear ? 'selected' : '' ?>><?= $yr ?></option>
+                        <?php 
+                            endforeach; 
+                        } else {
+                            for($i = $curYear; $i >= 2023; $i--): 
+                        ?>
+                        <option value="<?= $i ?>" <?= $i == $curYear ? 'selected' : '' ?>><?= $i ?></option>
+                        <?php 
+                            endfor;
+                        }
+                        ?>
+                    </select>
                 </div>
             </div>
             <div class="col-md-3 mb-3 mb-md-0">
@@ -56,7 +100,9 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+        </div>
+        <div class="row align-items-end">
+            <div class="col-md-3 mb-3 mb-md-0">
                 <div class="mb-0">
                     <label class="form-label text-uppercase fw-bold small text-muted">Filter <?= $type == 'penyedia' ? 'Metode' : 'Tipe' ?></label>
                     <select id="filter-metode" class="form-select">
@@ -64,12 +110,36 @@
                     </select>
                 </div>
             </div>
+            <?php if ($type == 'penyedia'): ?>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <div class="mb-0">
+                    <label class="form-label text-uppercase fw-bold small text-muted">Filter Sumber Dana</label>
+                    <select id="filter-sumber-dana" class="form-select">
+                        <option value="all">Semua Sumber Dana</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3 mb-md-0">
+                <div class="mb-0">
+                    <label class="form-label text-uppercase fw-bold small text-muted">Filter Status PDN</label>
+                    <select id="filter-status-pdn" class="form-select">
+                        <option value="all">Semua Status</option>
+                        <option value="PDN">PDN</option>
+                        <option value="Non-PDN">Non-PDN</option>
+                    </select>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
 <div class="card mb-4">
     <div class="card-body">
+        <div class="d-md-none text-muted mb-2 d-flex align-items-center" style="font-size: 11.5px; gap: 5px;">
+            <i class='bx bx-move-horizontal text-primary'></i>
+            <span>Geser tabel ke samping untuk melihat detail kolom</span>
+        </div>
         <div class="table-responsive">
             <table id="data-table" class="table table-hover border-top">
                 <thead>
@@ -80,11 +150,14 @@
                         <th class="col-pagu">Pagu</th>
                         <?php if ($type != 'swakelola'): ?><th>Jenis</th><?php endif; ?>
                         <th><?= $type == 'penyedia' ? 'Metode' : 'Tipe' ?></th>
-                        
+                        <?php if ($type == 'penyedia'): ?><th>Sumber Dana</th><?php endif; ?>
+                        <th class="col-mak">MAK</th>
                         <th>Volume</th>
                         <th class="col-uraian">Uraian</th>
+                        <?php if ($type == 'penyedia'): ?><th class="col-spesifikasi">Spesifikasi Pekerjaan</th><?php endif; ?>
                         <th>Mulai</th>
                         <th>Selesai</th>
+                        <?php if ($type == 'penyedia'): ?><th>PDN</th><?php endif; ?>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -113,12 +186,14 @@
 
 <script>
     const dataType = '<?= $type ?>';
-    const userSatker = '<?= session()->get('kd_satker') ?>';
-    const userRole = '<?= session()->get('role') ?>';
+    const userSatker    = '<?= session()->get('kd_satker') ?>';
+    const userNamaSatker = '<?= session()->get('nama_satker') ?>';
+    const userRole      = '<?= session()->get('role') ?>';
     let dataTable;
 
     $(document).ready(function() {
-        populateFilters();
+        const defaultYear = $('#filter-year').val();
+        populateFilters(defaultYear);
 
         dataTable = $('#data-table').DataTable({
             processing: true,
@@ -126,9 +201,14 @@
             ajax: {
                 url: `<?= base_url('dashboard/getDatatables') ?>/${dataType}`,
                 data: function(d) {
+                    d.year = $('#filter-year').val();
                     d.opd = $('#filter-opd').val();
                     d.jenis = $('#filter-jenis').val();
                     d.metode = $('#filter-metode').val();
+                    if (dataType === 'penyedia') {
+                        d.sumber_dana = $('#filter-sumber-dana').val();
+                        d.status_pdn = $('#filter-status-pdn').val();
+                    }
                 }
             },
             columns: [
@@ -158,11 +238,28 @@
                     },
                     defaultContent: '-'
                 },
+                <?php if ($type == 'penyedia'): ?>
+                { data: 'sumber_dana', defaultContent: '-' },
+                <?php endif; ?>
+                { 
+                    data: 'mak', 
+                    render: function(data) { 
+                        return data && data !== '-' ? `<small class="font-monospace text-break">${data}</small>` : '-'; 
+                    },
+                    defaultContent: '-' 
+                },
                 { data: 'volume_pekerjaan', defaultContent: '-' },
                 { 
                     data: 'urarian_pekerjaan', 
                     render: function(data) { return data || '-'; }
                 },
+                <?php if ($type == 'penyedia'): ?>
+                { 
+                    data: 'spesifikasi_pekerjaan', 
+                    render: function(data) { return data || '-'; },
+                    defaultContent: '-'
+                },
+                <?php endif; ?>
                 { 
                     data: 'tgl_awal_pemilihan', 
                     render: function(data) { return data || '-'; }
@@ -171,6 +268,18 @@
                     data: 'tgl_akhir_pemilihan', 
                     render: function(data) { return data || '-'; }
                 },
+                <?php if ($type == 'penyedia'): ?>
+                { 
+                    data: 'status_pdn',
+                    render: function(data) { 
+                        if (!data) return '-';
+                        let badge = 'bg-label-secondary';
+                        if (data === 'PDN') badge = 'bg-label-info';
+                        else if (data === 'Non-PDN' || data === 'Non PDN') badge = 'bg-label-warning';
+                        return `<span class="badge ${badge}">${data}</span>`; 
+                    }
+                },
+                <?php endif; ?>
                 { 
                     data: 'status_umumkan_rup',
                     render: function(data) {
@@ -179,15 +288,16 @@
                     }
                 }
             ],
-            dom: '<"d-flex justify-content-between align-items-center mb-3"Bl>rtip',
+            dom: '<"d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3 gap-2"Bl>rtip',
             buttons: [
                 {
                     extend: 'excelHtml5',
                     text: '<i class="far fa-file-excel mr-1"></i> Export Excel',
-                    title: `Data RUP ${dataType == 'penyedia' ? 'Penyedia' : 'Swakelola'}`,
+                    title: () => `Data RUP ${dataType == 'penyedia' ? 'Penyedia' : 'Swakelola'}`,
+                    messageTop: () => `Tanggal Export: ${new Date().toLocaleString('id-ID')}`,
                     className: 'btn btn-outline-success btn-sm me-2',
                     exportOptions: {
-                        columns: dataType === 'swakelola' ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        columns: dataType === 'swakelola' ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                     },
                     action: function(e, dt, node, config) {
                         runSmartExport.call(this, e, dt, node, config);
@@ -196,12 +306,13 @@
                 {
                     extend: 'pdfHtml5',
                     text: '<i class="far fa-file-pdf mr-1"></i> Export PDF',
-                    title: `Data RUP ${dataType == 'penyedia' ? 'Penyedia' : 'Swakelola'}`,
+                    title: () => `Data RUP ${dataType == 'penyedia' ? 'Penyedia' : 'Swakelola'}`,
+                    messageTop: () => `Tanggal Export: ${new Date().toLocaleString('id-ID')}`,
                     orientation: 'landscape',
                     pageSize: 'A3', // Change to A3 for more columns
                     className: 'btn btn-outline-danger btn-sm',
                     exportOptions: {
-                        columns: dataType === 'swakelola' ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        columns: dataType === 'swakelola' ? [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                     },
                     action: function(e, dt, node, config) {
                         runSmartExport.call(this, e, dt, node, config);
@@ -220,7 +331,13 @@
             dataTable.search(this.value).draw();
         });
 
-        $('#filter-opd, #filter-jenis, #filter-metode').on('change', function() {
+        $('#filter-year').on('change', async function() {
+            const selectedYear = $(this).val();
+            await populateFilters(selectedYear);
+            dataTable.ajax.reload();
+        });
+
+        $('#filter-opd, #filter-jenis, #filter-metode, #filter-sumber-dana, #filter-status-pdn').on('change', function() {
             dataTable.ajax.reload();
         });
     });
@@ -309,33 +426,69 @@
         '4': 'Swakelola Tipe IV - Direncanakan dan diawasi oleh K/L/PD penanggung jawab/Pokmas, dilaksanakan oleh Pokmas'
     };
 
-    async function populateFilters() {
-        const res = await fetch(`<?= base_url('dashboard/getData') ?>/${dataType}`);
+    async function populateFilters(year) {
+        const yearParam = year ? `?year=${year}` : '';
+        const res = await fetch(`<?= base_url('dashboard/getFilterOptions') ?>/${dataType}${yearParam}`);
         const data = await res.json();
         
-        const opdSelect = $('#filter-opd');
+        const opdSelect   = $('#filter-opd');
         const jenisSelect = $('#filter-jenis');
         const metodeSelect = $('#filter-metode');
 
-        const opds = [...new Set(data.map(i => i.nama_satker))].filter(Boolean).sort();
-        const jenisList = [...new Set(data.map(i => i.jenis_pengadaan))].filter(Boolean).sort();
-        const metodeList = [...new Set(data.map(i => dataType == 'penyedia' ? i.metode_pengadaan : i.tipe_swakelola))].filter(Boolean).sort();
-        
-        opds.forEach(o => opdSelect.append(new Option(o, o)));
-        jenisList.forEach(j => jenisSelect.append(new Option(j, j)));
-        metodeList.forEach(m => {
+        const prevOpd = opdSelect.val();
+        const prevJenis = jenisSelect.val();
+        const prevMetode = metodeSelect.val();
+
+        opdSelect.find('option:not(:first)').remove();
+        if (jenisSelect.length) jenisSelect.find('option:not(:first)').remove();
+        metodeSelect.find('option:not(:first)').remove();
+
+        data.opds.forEach(o => opdSelect.append(new Option(o, o)));
+        data.jenis.forEach(j => {
+            if (jenisSelect.length) jenisSelect.append(new Option(j, j));
+        });
+        data.metodes.forEach(m => {
             const label = (dataType === 'swakelola' && swakelolaTipeMapping[m]) ? swakelolaTipeMapping[m] : m;
             metodeSelect.append(new Option(label, m));
         });
 
-        // Only lock filter for 'satker' role
-        if (userRole === 'satker' && userSatker) {
-            const userOpd = data.find(i => i.kd_satker == userSatker)?.nama_satker;
-            if (userOpd) {
-                opdSelect.val(userOpd).prop('disabled', true);
+        if (dataType === 'penyedia' && data.sumber_dana) {
+            const sumberDanaSelect = $('#filter-sumber-dana');
+            const prevSumberDana = sumberDanaSelect.val();
+            sumberDanaSelect.find('option:not(:first)').remove();
+            data.sumber_dana.forEach(sd => {
+                if(sd) sumberDanaSelect.append(new Option(sd, sd));
+            });
+            if (sumberDanaSelect.find(`option[value="${prevSumberDana}"]`).length) {
+                sumberDanaSelect.val(prevSumberDana);
             }
-        } else {
-            opdSelect.prop('disabled', false);
+        }
+
+        if (opdSelect.find(`option[value="${prevOpd}"]`).length) {
+            opdSelect.val(prevOpd);
+        }
+        if (jenisSelect.length && jenisSelect.find(`option[value="${prevJenis}"]`).length) {
+            jenisSelect.val(prevJenis);
+        }
+        if (metodeSelect.find(`option[value="${prevMetode}"]`).length) {
+            metodeSelect.val(prevMetode);
+        }
+
+        // Kunci filter OPD untuk role satker/opd
+        if ((userRole === 'satker' || userRole === 'opd') && userNamaSatker) {
+            let matched = false;
+            opdSelect.find('option').each(function() {
+                if ($(this).val() === userNamaSatker) {
+                    opdSelect.val(userNamaSatker);
+                    matched = true;
+                    return false;
+                }
+            });
+            if (!matched && userNamaSatker) {
+                opdSelect.append(new Option(userNamaSatker, userNamaSatker));
+                opdSelect.val(userNamaSatker);
+            }
+            opdSelect.prop('disabled', true);
         }
     }
 

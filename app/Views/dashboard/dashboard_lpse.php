@@ -1,4 +1,4 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend(service('request')->getUserAgent()->isMobile() ? 'layout/mobile_main' : 'layout/main') ?>
 
 <?= $this->section('content') ?>
 <div class="container-xxl flex-grow-1 container-p-y" id="dashboard-content">
@@ -11,9 +11,16 @@
       </h4>
       <p class="text-muted mb-0">Ringkasan total pagu & realisasi seluruh metode pengadaan</p>
     </div>
-    <div class="d-flex gap-2 align-items-center">
-      <select id="year-filter" class="form-select form-select-sm" style="width:140px;">
+    <div class="d-flex gap-2 align-items-center flex-wrap">
+      <select id="year-filter" class="form-select form-select-sm" style="width:130px;">
         <option value="all">Semua Tahun</option>
+      </select>
+      <select id="quarter-filter" class="form-select form-select-sm" style="width:150px;">
+        <option value="all">Semua Triwulan</option>
+        <option value="1">Triwulan I (Q1)</option>
+        <option value="2">Triwulan II (Q2)</option>
+        <option value="3">Triwulan III (Q3)</option>
+        <option value="4">Triwulan IV (Q4)</option>
       </select>
       <a href="<?= base_url('dashboard/clear-cache') ?>" class="btn btn-outline-danger btn-sm">
         <i class="bx bx-refresh me-1"></i> Clear Cache
@@ -86,7 +93,7 @@
         padding: 0 !important;
         background: white !important;
       }
-      .btn, #year-filter, .card-header select, .layout-navbar, .layout-menu, .footer {
+      .btn, #year-filter, #quarter-filter, .card-header select, .layout-navbar, .layout-menu, .footer {
         display: none !important;
       }
       .card {
@@ -106,8 +113,8 @@
   </style>
 
   <!-- Summary Cards -->
-  <div class="row g-4 mb-4" id="summary-cards">
-    <div class="col-12 col-md-3">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-3 mb-4" id="summary-cards">
+    <div class="col">
       <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #2563eb !important;">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-start mb-2">
@@ -131,7 +138,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-3">
+    <div class="col">
       <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #0d9488 !important;">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-start mb-2">
@@ -155,7 +162,31 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-3">
+    <div class="col">
+      <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #10b981 !important;">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <div>
+              <p class="text-muted small mb-0">E-Purchasing</p>
+              <h5 class="fw-bold mb-0" style="color: #10b981;" id="card-epurchasing-realisasi">-</h5>
+              <div class="small text-muted">Pagu: <span id="card-epurchasing-pagu">-</span></div>
+              <div class="small text-success mt-1">Efisiensi: <span id="card-epurchasing-efisiensi">-</span></div>
+            </div>
+            <div class="avatar avatar-md rounded-circle" style="background-color: rgba(16,185,129,0.1); color: #10b981;">
+              <i class="bx bx-cart fs-4"></i>
+            </div>
+          </div>
+          <div class="progress mb-1" style="height: 6px;">
+            <div id="card-epurchasing-progress" class="progress-bar" role="progressbar" style="width: 0%; background-color: #10b981;"></div>
+          </div>
+          <div class="d-flex justify-content-between small">
+            <span class="text-muted" id="card-epurchasing-count">0 paket</span>
+            <span class="fw-bold" style="color: #10b981;" id="card-epurchasing-pct">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
       <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #7c3aed !important;">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-start mb-2">
@@ -179,7 +210,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-3">
+    <div class="col">
       <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #f59e0b !important;">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-start mb-2">
@@ -235,6 +266,24 @@
     </div>
   </div>
 
+  <!-- Quarterly Trend Chart: Realisasi per Triwulan -->
+  <div class="row g-4 mb-4">
+    <div class="col-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-transparent border-bottom-0 pb-0 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div>
+            <h6 class="fw-bold mb-0">Tren Penyerapan Realisasi per Triwulan (Q1 - Q4)</h6>
+            <small class="text-muted">Distribusi realisasi pengadaan per kuartal (Triwulan I - IV) berdasarkan metode pemilihan</small>
+          </div>
+          <span class="badge bg-label-primary px-3 py-2 fw-semibold" id="quarter-chart-badge">Tahun: Semua Tahun</span>
+        </div>
+        <div class="card-body pt-2">
+          <canvas id="chart-quarter" style="max-height: 320px;"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Comparison Chart: Pagu vs Realisasi -->
   <div class="row g-4">
     <div class="col-12">
@@ -262,6 +311,7 @@ const API_URL = '<?= base_url('dashboard/getDashboardLpseData') ?>';
 const COLORS = {
   'Tender':               { border: '#2563eb', bg: '#2563eb' },
   'Non Tender':           { border: '#0d9488', bg: '#0d9488' },
+  'E-Purchasing':         { border: '#10b981', bg: '#10b981' },
   'Pencatatan Non Tender':{ border: '#7c3aed', bg: '#7c3aed' },
   'Pencatatan Swakelola': { border: '#f59e0b', bg: '#f59e0b' },
 };
@@ -295,23 +345,25 @@ const hexToRgba = (hex, alpha) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
-let chartBar, chartDoughnut, chartComparison;
+let chartBar, chartDoughnut, chartComparison, chartQuarter;
 
 function destroyCharts() {
-  [chartBar, chartDoughnut, chartComparison].forEach(c => c && c.destroy());
+  [chartBar, chartDoughnut, chartComparison, chartQuarter].forEach(c => c && c.destroy());
 }
 
 async function exportToPDF() {
   const element = document.getElementById('dashboard-content');
   const year = document.getElementById('year-filter').value;
+  const quarter = document.getElementById('quarter-filter').value;
+  const qSuffix = quarter !== 'all' ? `_Q${quarter}` : '';
   
   // Custom styling for export
-  const uiElements = element.querySelectorAll('.btn, #year-filter, .card-header select');
+  const uiElements = element.querySelectorAll('.btn, #year-filter, #quarter-filter, .card-header select');
   uiElements.forEach(el => el.style.display = 'none');
   
   const opt = {
     margin:       [10, 5, 10, 5], // [top, left, bottom, right] - shift left slightly
-    filename:     `Dashboard_LPSE_${year}.pdf`,
+    filename:     `Dashboard_LPSE_${year}${qSuffix}.pdf`,
     image:        { type: 'jpeg', quality: 1 },
     html2canvas:  { 
       scale: 2, 
@@ -361,6 +413,7 @@ function buildCharts(data) {
   const cardMap = {
     'Tender':               ['card-tender-pagu', 'card-tender-realisasi', 'card-tender-count', 'card-tender-progress', 'card-tender-pct', 'card-tender-efisiensi'],
     'Non Tender':           ['card-nontender-pagu', 'card-nontender-realisasi', 'card-nontender-count', 'card-nontender-progress', 'card-nontender-pct', 'card-nontender-efisiensi'],
+    'E-Purchasing':         ['card-epurchasing-pagu', 'card-epurchasing-realisasi', 'card-epurchasing-count', 'card-epurchasing-progress', 'card-epurchasing-pct', 'card-epurchasing-efisiensi'],
     'Pencatatan Non Tender':['card-pct-nontender-pagu', 'card-pct-nontender-realisasi', 'card-pct-nontender-count', 'card-pct-nontender-progress', 'card-pct-nontender-pct', 'card-pct-nontender-efisiensi'],
     'Pencatatan Swakelola': ['card-pct-swakelola-pagu', 'card-pct-swakelola-realisasi', 'card-pct-swakelola-count', 'card-pct-swakelola-progress', 'card-pct-swakelola-pct', 'card-pct-swakelola-efisiensi'],
   };
@@ -559,10 +612,77 @@ function buildCharts(data) {
       }
     }
   });
+
+  // --- Quarterly Trend Chart: Realisasi per Triwulan ---
+  const byQuarter = data.by_quarter || {};
+  const quarterKeys = [1, 2, 3, 4];
+  const quarterNames = ['Triwulan I (Jan-Mar)', 'Triwulan II (Apr-Jun)', 'Triwulan III (Jul-Sep)', 'Triwulan IV (Okt-Des)'];
+  
+  if (byQuarter['undated'] && byQuarter['undated'].total > 0) {
+    quarterKeys.push('undated');
+    quarterNames.push('Tanpa Tanggal');
+  }
+
+  const quarterDatasets = labels.map(lbl => ({
+    label: lbl,
+    data: quarterKeys.map(k => byQuarter[k]?.by_source?.[lbl] || 0),
+    borderColor: COLORS[lbl]?.border,
+    backgroundColor: COLORS[lbl]?.border,
+    borderWidth: 2.5,
+    tension: 0.35,
+    pointRadius: 4,
+    pointHoverRadius: 6,
+    fill: false
+  }));
+
+  quarterDatasets.unshift({
+    label: 'Total Semua Metode',
+    data: quarterKeys.map(k => byQuarter[k]?.total || 0),
+    borderColor: '#0f172a',
+    backgroundColor: '#0f172a',
+    borderWidth: 3,
+    borderDash: [5, 5],
+    tension: 0.35,
+    pointRadius: 5,
+    pointHoverRadius: 7,
+    fill: false
+  });
+
+  chartQuarter = new Chart(document.getElementById('chart-quarter'), {
+    type: 'line',
+    data: {
+      labels: quarterNames,
+      datasets: quarterDatasets
+    },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { boxWidth: 14, padding: 15, usePointStyle: true } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${fmt(ctx.raw)}`
+          }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.03)' } },
+        y: { ticks: { callback: v => fmtShort(v) }, grid: { color: 'rgba(0,0,0,0.05)' } }
+      }
+    }
+  });
+
+  const curYear = document.getElementById('year-filter').value;
+  const curQ = document.getElementById('quarter-filter').value;
+  const qDesc = curQ === 'all' ? 'Semua Triwulan' : `Triwulan ${curQ}`;
+  document.getElementById('quarter-chart-badge').textContent = `Tahun: ${curYear === 'all' ? 'Semua Tahun' : curYear} | Filter: ${qDesc}`;
 }
 
-async function loadData(year = 'all') {
-  ['chart-bar','chart-doughnut','chart-comparison'].forEach(id => {
+async function loadData(year = null, quarter = null) {
+  if (year === null) year = document.getElementById('year-filter').value || 'all';
+  if (quarter === null) quarter = document.getElementById('quarter-filter').value || 'all';
+
+  ['chart-bar','chart-doughnut','chart-comparison','chart-quarter'].forEach(id => {
     const canvas = document.getElementById(id);
     if (canvas) canvas.style.opacity = '0.4';
   });
@@ -580,7 +700,7 @@ async function loadData(year = 'all') {
   }
 
   try {
-    const res = await fetch(`${API_URL}?year=${year}`);
+    const res = await fetch(`${API_URL}?year=${year}&quarter=${quarter}`);
     const data = await res.json();
 
     const sel = document.getElementById('year-filter');
@@ -598,7 +718,7 @@ async function loadData(year = 'all') {
   } catch(e) {
     console.error(e);
   } finally {
-    ['chart-bar','chart-doughnut','chart-comparison'].forEach(id => {
+    ['chart-bar','chart-doughnut','chart-comparison','chart-quarter'].forEach(id => {
       const canvas = document.getElementById(id);
       if (canvas) canvas.style.opacity = '1';
     });
@@ -611,9 +731,12 @@ async function loadData(year = 'all') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadData('all');
+  loadData('all', 'all');
   document.getElementById('year-filter').addEventListener('change', function() {
-    loadData(this.value);
+    loadData(this.value, document.getElementById('quarter-filter').value);
+  });
+  document.getElementById('quarter-filter').addEventListener('change', function() {
+    loadData(document.getElementById('year-filter').value, this.value);
   });
 });
 </script>
